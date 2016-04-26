@@ -10,7 +10,7 @@ public class OperateursApp {
 		double nb = sc.nextDouble();
 		System.out.println("NB = " + nb + "\n ");
 		double nb2 = sc.nextDouble();
-		System.out.println("NB2 = " + nb + "\n ");
+		System.out.println("NB2 = " + nb2 + "\n ");
 
 		System.out.println("NB + NB2 = " + (nb + nb2) + 
 				"\nNB - NB2 = " + (nb - nb2) + 
