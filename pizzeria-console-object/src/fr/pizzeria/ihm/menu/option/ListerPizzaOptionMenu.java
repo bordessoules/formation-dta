@@ -20,7 +20,7 @@ public class ListerPizzaOptionMenu extends OptionMenu {
 		for (Pizza p : pizzas) {
 			System.out.println(p.getCode() + " -> "+p.getNom() + " ( "+ p.getPrix() + " € )");
 		}
-		System.out.println("*****"+Pizza.getNbPizza()+"******");
+		System.out.println("***** "+Pizza.getNbPizza()+" ******");
 		return true;
 	}
 

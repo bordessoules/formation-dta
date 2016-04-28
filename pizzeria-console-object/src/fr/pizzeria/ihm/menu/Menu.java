@@ -2,7 +2,6 @@ package fr.pizzeria.ihm.menu;
 
 import java.util.Scanner;
 
-import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.ihm.menu.option.OptionMenu;
 
 public class Menu {
