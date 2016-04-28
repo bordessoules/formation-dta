@@ -3,6 +3,9 @@ package fr.pizzeria.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
@@ -15,9 +18,14 @@ public class PizzaDaoImpl implements IPizzaDao {
 	}
 
 	@Override
-	public boolean saveNewPizza(Pizza pizza) {
-
-		return pizzas.add(pizza);
+	public void saveNewPizza(Pizza pizza) throws SavePizzaException {
+		if (!doesPizzaExist(pizza.getCode())){
+			pizzas.add(pizza);
+		}
+		else {
+			throw new SavePizzaException();
+		}
+		 
 	}
 
 	public boolean doesPizzaExist(String codePizza) {
@@ -32,18 +40,17 @@ public class PizzaDaoImpl implements IPizzaDao {
 	}
 
 	@Override
-	public boolean updatePizza(String codePizza, Pizza pizza) {
+	public void updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException, DeletePizzaException, SavePizzaException {
 		if (doesPizzaExist(codePizza)) {
 			deletePizza(codePizza);
 			saveNewPizza(pizza);
 		} else {
-			System.out.println("code invalide");
+			throw new UpdatePizzaException();
 		}
-		return true;
 	}
 
 	@Override
-	public boolean deletePizza(String codePizza) {
+	public void deletePizza(String codePizza) throws DeletePizzaException {
 		if (doesPizzaExist(codePizza)){
 				for (int i = 0; i < pizzas.size(); i++) {
 					
@@ -53,10 +60,10 @@ public class PizzaDaoImpl implements IPizzaDao {
 				}
 		}
 		else {
-			System.out.println("code invalide");
+			throw new DeletePizzaException();
+			
 		}
-		return true;
-	
+
 		
 	}
 
