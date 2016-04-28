@@ -5,7 +5,7 @@ import java.util.Scanner;
 import fr.pizzeria.model.Pizza;
 
 public class PizzeriaAdminConsoleApp {
-
+/*
 	private static Pizza[] getTableauPizzas() {
 		Pizza[] pizzas = new Pizza[100];
 		pizzas[0] = new Pizza( "PEP", "Pépéroni", 12.50) ;
@@ -72,7 +72,7 @@ public class PizzeriaAdminConsoleApp {
 		boolean placeTrouve = false;
 		int index = 0;
 		while (!placeTrouve && index < pizzas.length) {
-			placeTrouve = pizzas[index].Code == null;
+			placeTrouve = pizzas[index].code == null;
 			index++;
 		}
 
@@ -117,7 +117,7 @@ public class PizzeriaAdminConsoleApp {
 	private static void afficherListePizzas(Pizza[] pizzas) {
 		for (int i = 0; i < pizzas.length; i++) {
 			if (pizzas[i] != null) {
-				System.out.println(pizzas[i].Code + " -> " + pizzas[i].Nom + " (" + pizzas[i].prix + ")");
+				System.out.println(pizzas[i].code + " -> " + pizzas[i].nom + " (" + pizzas[i].prix + ")");
 			}
 		}
 		System.out.println("***** "+Pizza.nbPizza+" pizzas créées depuis l’initialisation du programme");
@@ -127,7 +127,7 @@ public class PizzeriaAdminConsoleApp {
 		boolean pizzaTrouve = false;
 		int indexPizzaTrouve = 0;
 		while (!pizzaTrouve && indexPizzaTrouve < pizzas.length) {
-			pizzaTrouve = codePizza.equals(pizzas[indexPizzaTrouve].Code);
+			pizzaTrouve = codePizza.equals(pizzas[indexPizzaTrouve].code);
 			if (!pizzaTrouve) {
 				indexPizzaTrouve++;
 			}
@@ -144,7 +144,7 @@ public class PizzeriaAdminConsoleApp {
 		double newPrix = sc.nextDouble();
 		return new Pizza( newCode, newNom, newPrix );
 	}
-
+*/
 }
 
 
