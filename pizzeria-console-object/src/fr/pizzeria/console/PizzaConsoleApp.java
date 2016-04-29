@@ -10,14 +10,21 @@ import fr.pizzeria.ihm.menu.option.ListerPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.ModifierPizzaMenuOption;
 import fr.pizzeria.ihm.menu.option.QuitterOptionMenu;
 import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
+import fr.pizzeria.model.CategoriePizza;
+import fr.pizzeria.model.Pizza;
 
 public class PizzaConsoleApp {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		IPizzaDao pizzaDao=new PizzaDaoImpl();
-		Menu menu = new Menu(  new QuitterOptionMenu(),"admin console",sc,new ListerPizzaOptionMenu(pizzaDao),new AjouterPizzaOptionMenu(pizzaDao, sc),new ModifierPizzaMenuOption(pizzaDao, sc),new SupprimerPizzaOptionMenu(pizzaDao, sc) );
+		IPizzaDao pizzaDao = new PizzaDaoImpl();
+		Menu menu = new Menu(new QuitterOptionMenu(), "admin console", sc, new ListerPizzaOptionMenu(pizzaDao),
+				new AjouterPizzaOptionMenu(pizzaDao, sc), new ModifierPizzaMenuOption(pizzaDao, sc),
+				new SupprimerPizzaOptionMenu(pizzaDao, sc));
+
 		menu.afficher();
+
+		sc.close();
 	}
 
 }
