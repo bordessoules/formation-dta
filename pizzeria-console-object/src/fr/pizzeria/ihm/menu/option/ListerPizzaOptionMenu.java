@@ -18,7 +18,7 @@ public class ListerPizzaOptionMenu extends OptionMenu {
 		//System.out.println("lister pizza menu");
 		List<Pizza> pizzas = pizzaDao.findAllPizzas();
 		for (Pizza p : pizzas) {
-			System.out.println(p.getCode() + " -> "+p.getNom() + " ( "+ p.getPrix() + " € )");
+			System.out.println(p);
 		}
 		System.out.println("***** "+Pizza.getNbPizza()+" ******");
 		return true;
