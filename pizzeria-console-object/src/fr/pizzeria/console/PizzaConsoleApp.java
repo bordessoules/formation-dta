@@ -16,7 +16,7 @@ public class PizzaConsoleApp {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		IPizzaDao pizzaDao=new PizzaDaoImpl();
-		Menu menu = new Menu( "admin console",sc,new ListerPizzaOptionMenu(pizzaDao),new AjouterPizzaOptionMenu(pizzaDao, sc),new ModifierPizzaMenuOption(pizzaDao, sc),new SupprimerPizzaOptionMenu(pizzaDao, sc), new QuitterOptionMenu() );
+		Menu menu = new Menu(  new QuitterOptionMenu(),"admin console",sc,new ListerPizzaOptionMenu(pizzaDao),new AjouterPizzaOptionMenu(pizzaDao, sc),new ModifierPizzaMenuOption(pizzaDao, sc),new SupprimerPizzaOptionMenu(pizzaDao, sc) );
 		menu.afficher();
 	}
 

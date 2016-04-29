@@ -1,9 +1,9 @@
 package fr.pizzeria.ihm.menu;
 
-import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 import fr.pizzeria.ihm.menu.option.OptionMenu;
 
@@ -12,14 +12,15 @@ public class Menu {
 	Map<Integer, OptionMenu> actions;
 	private Scanner scan;
 
-	public Menu(String title, Scanner scan, OptionMenu... menus) {
+	public Menu(OptionMenu menuExit,String title, Scanner scan, OptionMenu... menus) {
 		this.title = title;
 		this.scan = scan;
-		this.actions = new HashMap<Integer, OptionMenu>();
+		this.actions = new TreeMap<Integer, OptionMenu>();
 		for (int i = 0; i < menus.length; i++) {
 			this.actions.put(i, menus[i]);
 
 		}
+		this.actions.put(99, menuExit);
 	}
 
 	public void afficher() {
