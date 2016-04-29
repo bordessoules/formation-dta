@@ -17,7 +17,7 @@ public class Menu {
 		this.scan = scan;
 		this.actions = new TreeMap<Integer, OptionMenu>();
 		for (int i = 0; i < menus.length; i++) {
-			this.actions.put(i, menus[i]);
+			this.actions.put(i+1, menus[i]);
 
 		}
 		this.actions.put(99, menuExit);

@@ -2,6 +2,8 @@ package fr.pizzeria.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
@@ -9,18 +11,19 @@ import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
-	private List<Pizza> pizzas;
+	private Map<String,Pizza> pizzas;
 
 	@Override
 	public List<Pizza> findAllPizzas() {
 
-		return new ArrayList<Pizza>(pizzas);
+		return new ArrayList<Pizza>(pizzas.values()) ;
 	}
 
 	@Override
 	public void saveNewPizza(Pizza pizza) throws SavePizzaException {
-		if (!doesPizzaExist(pizza.getCode())){
-			pizzas.add(pizza);
+		if (!pizzas.containsKey(pizza.getCode())){
+			pizzas.put(pizza.getCode(),pizza);
+		
 		}
 		else {
 			throw new SavePizzaException();
@@ -28,21 +31,12 @@ public class PizzaDaoImpl implements IPizzaDao {
 		 
 	}
 
-	public boolean doesPizzaExist(String codePizza) {
-		for (Pizza p : pizzas) {
-			if (p.getCode().equals(codePizza)) {
-				return true;
-			}
-
-		}
-		return false;
-
-	}
+	
 
 	@Override
-	public void updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException, DeletePizzaException, SavePizzaException {
-		if (doesPizzaExist(codePizza)) {
-			deletePizza(codePizza);
+	public void updatePizza(String codeOldPizza, Pizza pizza) throws UpdatePizzaException, DeletePizzaException, SavePizzaException {
+		if (pizzas.containsKey(codeOldPizza) ) {
+			deletePizza(codeOldPizza);
 			saveNewPizza(pizza);
 		} else {
 			throw new UpdatePizzaException();
@@ -51,13 +45,9 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	@Override
 	public void deletePizza(String codePizza) throws DeletePizzaException {
-		if (doesPizzaExist(codePizza)){
-				for (int i = 0; i < pizzas.size(); i++) {
-					
-					if (pizzas.get(i).getCode().equals(codePizza) ){
-						pizzas.remove(i);
-					}
-				}
+		if (pizzas.containsKey(codePizza)){
+				pizzas.remove(codePizza);
+				
 		}
 		else {
 			throw new DeletePizzaException();
@@ -69,15 +59,15 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	public PizzaDaoImpl() {
 		super();
-		pizzas = new ArrayList<Pizza>();
-		pizzas.add(new Pizza("PEP", "Pépéroni", 12.50));
-		pizzas.add(new Pizza("MAR", "Margherita", 14.00));
-		pizzas.add(new Pizza("REI", "La Reine", 11.50));
-		pizzas.add(new Pizza("FRO", "La 4 fromages", 12.00));
-		pizzas.add(new Pizza("CAN", "La cannibale", 12.50));
-		pizzas.add(new Pizza("SAV", "La savoyarde", 13.00));
-		pizzas.add(new Pizza("ORI", "L'orientale", 13.50));
-		pizzas.add(new Pizza("IND", "L'indienne", 14.00));
+		pizzas = new TreeMap<String,Pizza>();
+		pizzas.put("PEP",new Pizza("PEP", "Pépéroni", 12.50));
+		pizzas.put("MAR",new Pizza("MAR", "Margherita", 14.00));
+		pizzas.put("REI",new Pizza("REI", "La Reine", 11.50));
+		pizzas.put("FRO",new Pizza("FRO", "La 4 fromages", 12.00));
+		pizzas.put("CAN",new Pizza("CAN", "La cannibale", 12.50));
+		pizzas.put("SAV",new Pizza("SAV", "La savoyarde", 13.00));
+		pizzas.put("ORI",new Pizza("ORI", "L'orientale", 13.50));
+		pizzas.put("IND",new Pizza("IND", "L'indienne", 14.00));
 	}
 
 }

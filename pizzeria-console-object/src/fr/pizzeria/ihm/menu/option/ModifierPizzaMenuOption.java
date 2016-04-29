@@ -21,9 +21,9 @@ public class ModifierPizzaMenuOption extends OptionMenu {
 
 	@Override
 	public boolean execute() {
-		String code;
+		String codeold;
 		System.out.println("entrer code pizza a modifier : ");
-		code = sc.next();
+		codeold = sc.next();
 		System.out.println("caracteristique de la nouvelle pizza");
 		String code2, nom;
 		double prix;
@@ -37,7 +37,7 @@ public class ModifierPizzaMenuOption extends OptionMenu {
 			Pizza p = new Pizza(code2, nom, prix);
 
 			try {
-				pizzaDao.updatePizza(code, p);
+				pizzaDao.updatePizza(codeold, p);
 			} catch (UpdatePizzaException | DeletePizzaException | SavePizzaException e) {
 				// TODO Auto-generated catch block
 				System.err.println("la pizza a modifier n'existe pas (mauvais code pizza)");
