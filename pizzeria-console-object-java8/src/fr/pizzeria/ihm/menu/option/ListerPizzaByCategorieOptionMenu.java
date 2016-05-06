@@ -6,10 +6,10 @@ import java.util.List;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.model.Pizza;
 
-public class ListerPizzaByCategorie extends OptionMenu {
+public class ListerPizzaByCategorieOptionMenu extends OptionMenu {
 
 
-	public ListerPizzaByCategorie(IPizzaDao pizzaDao) {
+	public ListerPizzaByCategorieOptionMenu(IPizzaDao pizzaDao) {
 		this.libelle = "Lister pizzas par categorie ";
 		this.pizzaDao=pizzaDao;
 	}
