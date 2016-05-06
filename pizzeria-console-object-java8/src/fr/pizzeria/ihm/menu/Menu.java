@@ -23,15 +23,19 @@ public class Menu {
 		this.actions.put(99, menuExit);
 	}
 
+	
 	public void afficher() {
 		int choice;
 		boolean arret = true;
 		do {
 			System.out.println("****** " + title + " ******");
-			for (Integer i : actions.keySet()) {
+		//	actions.va.stream().forEach(System.out::println);
+			actions.entrySet().stream().
+			forEach(optionMenuEntry -> System.out.println(optionMenuEntry.getKey() + ". "+optionMenuEntry.getValue().getLibelle()));
+			/*for (Integer i : actions.keySet()) {
 				System.out.println(i + " " + actions.get(i).getLibelle());
 			}
-			
+			*/
 			System.out.println("faites votre choix");
 			try {
 				choice = this.scan.nextInt();

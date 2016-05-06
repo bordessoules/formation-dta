@@ -2,6 +2,8 @@ package fr.pizzeria.model;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Pizza {
 	// private int id;
@@ -25,23 +27,16 @@ public class Pizza {
 
 	@Override
 	public String toString() {
-		String retour = "";
-		for (Field c : this.getClass().getDeclaredFields()) {
-			ToString annotation = c.getAnnotation(ToString.class);
-			if (annotation != null) {
-
-				try {
-					boolean uppercase = annotation.uPPERCASE();
-					Object valeurDuChamp = c.get(this);
-					retour +=  (uppercase ? valeurDuChamp.toString().toUpperCase() : valeurDuChamp) + " ";
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		}
-		return retour;
+		return Arrays.asList(this.getClass().getDeclaredFields()).stream()
+				.filter(field -> field.getAnnotation(ToString.class)!=null)
+				.map(field-> {
+					try {
+						return field.getAnnotation(ToString.class).uPPERCASE()? field.get(this).toString().toUpperCase() : field.get(this).toString() + " ";
+					} catch (IllegalArgumentException | IllegalAccessException e) {
+						e.printStackTrace();
+						return "";
+					}
+					}).collect(Collectors.joining(" "));
 	}
 
 	public CategoriePizza getCategorie() {

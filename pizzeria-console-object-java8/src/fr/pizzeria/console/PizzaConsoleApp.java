@@ -6,7 +6,9 @@ import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.ihm.menu.Menu;
 import fr.pizzeria.ihm.menu.option.AjouterPizzaOptionMenu;
+import fr.pizzeria.ihm.menu.option.ListerPizzaByCategorie;
 import fr.pizzeria.ihm.menu.option.ListerPizzaOptionMenu;
+import fr.pizzeria.ihm.menu.option.ListerPizzaPrixOptionMenu;
 import fr.pizzeria.ihm.menu.option.ModifierPizzaMenuOption;
 import fr.pizzeria.ihm.menu.option.QuitterOptionMenu;
 import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
@@ -20,7 +22,7 @@ public class PizzaConsoleApp {
 		IPizzaDao pizzaDao = new PizzaDaoImpl();
 		Menu menu = new Menu(new QuitterOptionMenu(), "admin console", sc, new ListerPizzaOptionMenu(pizzaDao),
 				new AjouterPizzaOptionMenu(pizzaDao, sc), new ModifierPizzaMenuOption(pizzaDao, sc),
-				new SupprimerPizzaOptionMenu(pizzaDao, sc));
+				new SupprimerPizzaOptionMenu(pizzaDao, sc),new ListerPizzaByCategorie(pizzaDao),new ListerPizzaPrixOptionMenu(pizzaDao));
 
 		menu.afficher();
 
