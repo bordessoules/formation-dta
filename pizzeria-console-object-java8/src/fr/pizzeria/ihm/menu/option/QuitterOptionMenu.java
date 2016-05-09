@@ -1,11 +1,19 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.util.Scanner;
+
+import fr.pizzeria.dao.IPizzaDao;
+
 public class QuitterOptionMenu extends OptionMenu {
 
-	public QuitterOptionMenu() {
-		this.libelle="Quitter ";
-	}
+	
+	private static final String AJOUTER_PIZZA_LIBELLE_MENU = "Quitter";
 
+	public QuitterOptionMenu(Scanner scanner, IPizzaDao pizzaDao) {
+		super(AJOUTER_PIZZA_LIBELLE_MENU, pizzaDao, scanner);
+		
+	}
+	
 	@Override
 	public boolean execute() {
 		System.out.println("bye bye");

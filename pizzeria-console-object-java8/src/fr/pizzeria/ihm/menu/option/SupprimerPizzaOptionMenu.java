@@ -3,16 +3,14 @@ package fr.pizzeria.ihm.menu.option;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.exception.DaoException;
 
 public class SupprimerPizzaOptionMenu extends OptionMenu {
-	private Scanner sc;
+	private static final String AJOUTER_PIZZA_LIBELLE_MENU =  "Supprimer pizzas ";
 
-	public SupprimerPizzaOptionMenu(IPizzaDao pizzaDao, Scanner sc) {
-		this.libelle = "Supprimer pizzas ";
-		this.pizzaDao = pizzaDao;
-		this.sc = sc;
-
+	public SupprimerPizzaOptionMenu(Scanner scanner, IPizzaDao pizzaDao) {
+		super(AJOUTER_PIZZA_LIBELLE_MENU, pizzaDao, scanner);
+		
 	}
 
 	@Override
@@ -22,7 +20,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 		code = sc.next();
 		try {
 			pizzaDao.deletePizza(code);
-		} catch (DeletePizzaException e) {
+		} catch (DaoException e) {
 			System.err.println("le code pizza ne corespond pas a une pizza");
 		}
 		return true;

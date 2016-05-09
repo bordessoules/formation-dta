@@ -5,13 +5,14 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.ihm.menu.option.OptionMenu;
 
 public class Menu {
 	private String title;
 	Map<Integer, OptionMenu> actions;
 	private Scanner scan;
-
+	IPizzaDao dao;
 	public Menu(OptionMenu menuExit,String title, Scanner scan, OptionMenu... menus) {
 		this.title = title;
 		this.scan = scan;
@@ -23,6 +24,17 @@ public class Menu {
 		this.actions.put(99, menuExit);
 	}
 
+	public Menu(IPizzaDao dao,OptionMenu menuExit,String title, Scanner scan, OptionMenu... menus) {
+		this.dao=dao;
+		this.title = title;
+		this.scan = scan;
+		this.actions = new TreeMap<Integer, OptionMenu>();
+		for (int i = 0; i < menus.length; i++) {
+			this.actions.put(i, menus[i]);
+
+		}
+		this.actions.put(99, menuExit);
+	}
 	
 	public void afficher() {
 		int choice;

@@ -5,46 +5,51 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
+/**
+ */
 public class AjouterPizzaOptionMenu extends OptionMenu {
 
-	private Scanner sc;
+	private static final String AJOUTER_PIZZA_LIBELLE_MENU = "Ajouter Nouvelle Pizza";
 
-	public AjouterPizzaOptionMenu(IPizzaDao pizzaDao, Scanner sc) {
-		this.sc = sc;
-		this.libelle = "Ajouter pizzas ";
-		this.pizzaDao = pizzaDao;
+	public AjouterPizzaOptionMenu(Scanner scanner, IPizzaDao pizzaDao) {
+		super(AJOUTER_PIZZA_LIBELLE_MENU, pizzaDao, scanner);
 	}
 
 	@Override
 	public boolean execute() {
-		System.out.println("Ajout d'une nouvelle pizza");
-		String code, nom,categorie =null;
-		double prix;
-		System.out.println("Saisir code pizza : ");
-		code = sc.next();
-		System.out.println("Saisir nom pizza : ");
-		nom = sc.next();
-		System.out.println("Saisir prix pizza : ");
+
+		Pizza newPizza = new Pizza();
+		System.out.println("Veuillez saisir le code");
+		newPizza.setCode(sc.next());
+		System.out.println("Veuillez saisir le nom (sans espace)");
+		newPizza.setNom(sc.next());
+		System.out.println("Veuillez saisir le prix");
 		try {
-			prix = sc.nextDouble();
-			System.out.println("veullez saisir la categorie \n"+Arrays.toString(CategoriePizza.values()));
-			 categorie=sc.next();
-			try {
-				pizzaDao.saveNewPizza(new Pizza(code, nom, prix,CategoriePizza.valueOf(categorie)));
-			} catch (SavePizzaException e) {
-				System.err.println("erreur le code " + code + "est deja utilisé");
-			}
-		} catch (InputMismatchException e ) {
-			sc.next();
-			System.err.println("le prix saisie n'etait au bon format");
+			newPizza.setPrix(sc.nextDouble());
+
+			System.out.println("Veuillez saisir la catégorie");
+
+			CategoriePizza[] categoriePizzas = CategoriePizza.values();
+
+			Arrays.asList(categoriePizzas)
+					.forEach(cat -> System.out.println(cat.ordinal() + " -> " + cat.getLibelle()));
+
+			int saisieCategorie = sc.nextInt();
+			newPizza.setCategorie(categoriePizzas[saisieCategorie]);
+
+			pizzaDao.saveNewPizza(newPizza);
+			System.out.println("Nouvelle pizza créée");
+
+		} catch (InputMismatchException e) {
+			System.err.println("Input " + sc.next() + " n'est pas un nombre");
+		} catch (DaoException e) {
+			System.err.println("Echec création de pizza");
 		}
-		catch (IllegalArgumentException e){
-			System.err.println("la categorie "+categorie+"n'est pas reconnue");
-		}
+
 		return true;
 	}
 

@@ -5,22 +5,22 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.exception.DeletePizzaException;
-import fr.pizzeria.exception.SavePizzaException;
-import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class ModifierPizzaMenuOption extends OptionMenu {
 
-	private Scanner sc;
 
-	public ModifierPizzaMenuOption(IPizzaDao pizzaDao, Scanner sc) {
-		this.libelle = "Modifier pizzas ";
-		this.pizzaDao = pizzaDao;
-		this.sc = sc;
+	
+	private static final String AJOUTER_PIZZA_LIBELLE_MENU = "Modifier pizzas";
+
+	public ModifierPizzaMenuOption(Scanner scanner, IPizzaDao pizzaDao) {
+		super(AJOUTER_PIZZA_LIBELLE_MENU, pizzaDao, scanner);
+
 	}
 
+	
 	@Override
 	public boolean execute() {
 		String codeold;
@@ -42,9 +42,9 @@ public class ModifierPizzaMenuOption extends OptionMenu {
 
 			try {
 				pizzaDao.updatePizza(codeold, p);
-			} catch (UpdatePizzaException | DeletePizzaException | SavePizzaException e) {
+			} catch (DaoException e) {
 				// TODO Auto-generated catch block
-				System.err.println("la pizza a modifier n'existe pas (mauvais code pizza)");
+				e.printStackTrace();
 			}
 		} catch (InputMismatchException e) {
 			sc.next();
