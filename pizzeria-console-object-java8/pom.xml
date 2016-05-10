@@ -3,43 +3,21 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<artifactId>pizzeria-console-object-java8</artifactId>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>fr.pizzeria</groupId>
-	<version>1.0.0</version>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<junit.version>4.12</junit.version>
-		<system-rules.version>1.16.0</system-rules.version>
-	</properties>
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
-					</configuration>
-				</plugin>
-
-				<plugin>
-					<artifactId>maven-jar-plugin</artifactId>
-					<configuration>
-						<archive>
-							<manifest>
-								<mainClass>fr.pizzeria.console.PizzaAdminApp</mainClass>
-							</manifest>
-						</archive>
-					</configuration>
-				</plugin>
-
-			</plugins>
-		</pluginManagement>
+	<version>1.0.0</version>	
+	<parent>
+		<groupId>fr.pizzeria</groupId>
+		<artifactId>pizzeria-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+		
+	</parent>
+		<build>
+		
 		<plugins>
-
+		
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.4.3</version>
 				<executions>
 					<execution>
 						<phase>package</phase>
@@ -49,41 +27,25 @@
 					</execution>
 				</executions>
 			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>3.0.0</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<phase>package</phase>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
 		</plugins>
 	</build>
+	
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
+		
 		<dependency>
 			<groupId>com.github.stefanbirkner</groupId>
 			<artifactId>system-rules</artifactId>
-			<version>${system-rules.version}</version>
-			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>fr.pizzeria</groupId>
+			<artifactId>pizzeria-dao</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.4</version>
+			<groupId>fr.pizzeria</groupId>
+			<artifactId>pizzeria-model</artifactId>
 		</dependency>
 	</dependencies>
+	
+	
 </project>
