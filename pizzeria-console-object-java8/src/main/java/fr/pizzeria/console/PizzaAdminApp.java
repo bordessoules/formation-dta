@@ -41,10 +41,12 @@ public class PizzaAdminApp {
 package fr.pizzeria.console;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoFichierImpl;
+import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.ihm.menu.Menu;
 import fr.pizzeria.ihm.menu.option.AjouterPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.ListerPizzaByCategorieOptionMenu;
@@ -57,10 +59,32 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzaAdminApp {
 	public static void main(String[] args) throws IOException {
+
+		Integer option = -1;
+
+		try {
+			ResourceBundle bundle = ResourceBundle.getBundle("application");
+			String confString = bundle.getString("dao.impl");
+			option = Integer.valueOf(confString);
+
+			System.out.println(confString);
+
+		} catch (Exception e) {
+			System.err.println("probleme avec le application.properties");
+		}
+
 		new Pizza().equals(new Pizza());
 		try (Scanner sc = new Scanner(System.in)) {
-			IPizzaDao pizzaDao = new PizzaDaoFichierImpl();
-
+			IPizzaDao pizzaDao;
+			if (option == 1) {
+				pizzaDao = new PizzaDaoFichierImpl();
+			} else {
+				if (option == 0) {
+					pizzaDao = new PizzaDaoImpl();
+				} else {
+					return;
+				}
+			}
 			Menu menu = new Menu(new QuitterOptionMenu(sc, pizzaDao), "admin console", sc,
 					new ListerPizzaOptionMenu(sc, pizzaDao), new AjouterPizzaOptionMenu(sc, pizzaDao),
 					new ModifierPizzaMenuOption(sc, pizzaDao), new SupprimerPizzaOptionMenu(sc, pizzaDao),
