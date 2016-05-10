@@ -26,12 +26,13 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 		System.out.println("Veuillez saisir le code");
 		newPizza.setCode(sc.next());
 		System.out.println("Veuillez saisir le nom (sans espace)");
+		
 		newPizza.setNom(sc.next());
 		System.out.println("Veuillez saisir le prix");
 		try {
 			newPizza.setPrix(sc.nextDouble());
 
-			System.out.println("Veuillez saisir la catégorie");
+			System.out.println("Veuillez saisir la catÃ©gorie");
 
 			CategoriePizza[] categoriePizzas = CategoriePizza.values();
 
@@ -42,12 +43,12 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 			newPizza.setCategorie(categoriePizzas[saisieCategorie]);
 
 			pizzaDao.saveNewPizza(newPizza);
-			System.out.println("Nouvelle pizza créée");
+			System.out.println("Nouvelle pizza crÃ©Ã©e");
 
 		} catch (InputMismatchException e) {
 			System.err.println("Input " + sc.next() + " n'est pas un nombre");
 		} catch (DaoException e) {
-			System.err.println("Echec création de pizza");
+			System.err.println("Echec crÃ©ation de pizza");
 		}
 
 		return true;

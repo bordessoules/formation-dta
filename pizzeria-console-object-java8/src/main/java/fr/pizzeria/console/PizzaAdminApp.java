@@ -53,9 +53,11 @@ import fr.pizzeria.ihm.menu.option.ListerPizzaPrixOptionMenu;
 import fr.pizzeria.ihm.menu.option.ModifierPizzaMenuOption;
 import fr.pizzeria.ihm.menu.option.QuitterOptionMenu;
 import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
+import fr.pizzeria.model.Pizza;
 
 public class PizzaAdminApp {
 	public static void main(String[] args) throws IOException {
+		new Pizza().equals(new Pizza());
 		try (Scanner sc = new Scanner(System.in)) {
 			IPizzaDao pizzaDao = new PizzaDaoFichierImpl();
 
