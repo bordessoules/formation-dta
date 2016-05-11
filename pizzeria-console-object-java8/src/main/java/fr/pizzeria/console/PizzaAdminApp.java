@@ -85,8 +85,7 @@ public class PizzaAdminApp {
 				System.err.println("dao non configuré regarder application.properties");
 				return;
 			}
- int[]erreur =new int[]{};
- System.out.println(erreur[1]);
+ 
 			Menu menu = new Menu(new QuitterOptionMenu(sc, pizzaDao), "admin console", sc,
 					new ListerPizzaOptionMenu(sc, pizzaDao), new AjouterPizzaOptionMenu(sc, pizzaDao),
 					new ModifierPizzaMenuOption(sc, pizzaDao), new SupprimerPizzaOptionMenu(sc, pizzaDao),
