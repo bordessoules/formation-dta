@@ -1,7 +1,6 @@
 package fr.pizzeria.model;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
 
 public class Pizza {
 	// private int id;

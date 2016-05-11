@@ -11,6 +11,27 @@
 		<relativePath>../pom.xml</relativePath>
 		
 	</parent>
+	
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<dao.impl>0</dao.impl>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+
+		<profile>
+			<id>prod</id>
+			<properties>
+				<dao.impl>1</dao.impl>
+			</properties>
+		</profile>
+	</profiles>
+	
+	
 		<build>
 		
 		<plugins>

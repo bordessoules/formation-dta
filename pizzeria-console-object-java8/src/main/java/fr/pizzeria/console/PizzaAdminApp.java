@@ -66,32 +66,32 @@ public class PizzaAdminApp {
 			ResourceBundle bundle = ResourceBundle.getBundle("application");
 			String confString = bundle.getString("dao.impl");
 			option = Integer.valueOf(confString);
-
-			System.out.println(confString);
-
 		} catch (Exception e) {
-			System.err.println("probleme avec le application.properties");
+			System.err.println("probleme avec la lecture de application.properties");
 		}
 
 		new Pizza().equals(new Pizza());
 		try (Scanner sc = new Scanner(System.in)) {
 			IPizzaDao pizzaDao;
-			if (option == 1) {
+			switch (option) {
+			case 0:
+				pizzaDao = new PizzaDaoImpl();
+				break;
+			case 1:
 				pizzaDao = new PizzaDaoFichierImpl();
-			} else {
-				if (option == 0) {
-					pizzaDao = new PizzaDaoImpl();
-				} else {
-					return;
-				}
+				break;
+
+			default:
+				System.err.println("dao non configuré regarder application.properties");
+				return;
 			}
+
 			Menu menu = new Menu(new QuitterOptionMenu(sc, pizzaDao), "admin console", sc,
 					new ListerPizzaOptionMenu(sc, pizzaDao), new AjouterPizzaOptionMenu(sc, pizzaDao),
 					new ModifierPizzaMenuOption(sc, pizzaDao), new SupprimerPizzaOptionMenu(sc, pizzaDao),
 					new ListerPizzaByCategorieOptionMenu(sc, pizzaDao), new ListerPizzaPrixOptionMenu(sc, pizzaDao));
 
 			menu.afficher();
-
 		}
 
 	}

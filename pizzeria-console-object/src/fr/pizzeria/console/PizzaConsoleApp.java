@@ -10,8 +10,6 @@ import fr.pizzeria.ihm.menu.option.ListerPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.ModifierPizzaMenuOption;
 import fr.pizzeria.ihm.menu.option.QuitterOptionMenu;
 import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
-import fr.pizzeria.model.CategoriePizza;
-import fr.pizzeria.model.Pizza;
 
 public class PizzaConsoleApp {
 
