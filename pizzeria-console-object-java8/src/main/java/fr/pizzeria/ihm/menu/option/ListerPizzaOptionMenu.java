@@ -22,7 +22,7 @@ public class ListerPizzaOptionMenu extends OptionMenu {
 
 	@Override
 	public boolean execute() {
-		//System.out.println("lister pizza menu");
+
 		List<Pizza> pizzas;
 		
 		try {

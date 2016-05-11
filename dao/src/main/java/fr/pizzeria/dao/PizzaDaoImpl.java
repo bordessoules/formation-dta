@@ -17,7 +17,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	@Override
 	public List<Pizza> findAllPizzas() {
 
-		return new ArrayList<Pizza>(pizzas.values());
+		return new ArrayList<>(pizzas.values());
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	public PizzaDaoImpl() {
 		super();
-		pizzas = new TreeMap<String, Pizza>();
+		pizzas = new TreeMap<>();
 		pizzas.put("PEP", new Pizza("PEP", "Pépéroni", 12.50,CategoriePizza.VIANDE));
 		pizzas.put("MAR", new Pizza("MAR", "Margherita", 14.00,CategoriePizza.SANS_VIANDE));
 		pizzas.put("REI", new Pizza("REI", "La Reine", 11.50,CategoriePizza.VIANDE));

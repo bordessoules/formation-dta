@@ -16,7 +16,7 @@ public class Menu {
 	public Menu(OptionMenu menuExit,String title, Scanner scan, OptionMenu... menus) {
 		this.title = title;
 		this.scan = scan;
-		this.actions = new TreeMap<Integer, OptionMenu>();
+		this.actions = new TreeMap<>();
 		for (int i = 0; i < menus.length; i++) {
 			this.actions.put(i, menus[i]);
 
@@ -28,7 +28,7 @@ public class Menu {
 		this.dao=dao;
 		this.title = title;
 		this.scan = scan;
-		this.actions = new TreeMap<Integer, OptionMenu>();
+		this.actions = new TreeMap<>();
 		for (int i = 0; i < menus.length; i++) {
 			this.actions.put(i, menus[i]);
 
@@ -41,13 +41,9 @@ public class Menu {
 		boolean arret = true;
 		do {
 			System.out.println("****** " + title + " ******");
-		//	actions.va.stream().forEach(System.out::println);
 			actions.entrySet().stream().
 			forEach(optionMenuEntry -> System.out.println(optionMenuEntry.getKey() + ". "+optionMenuEntry.getValue().getLibelle()));
-			/*for (Integer i : actions.keySet()) {
-				System.out.println(i + " " + actions.get(i).getLibelle());
-			}
-			*/
+			
 			System.out.println("faites votre choix");
 			try {
 				choice = this.scan.nextInt();
