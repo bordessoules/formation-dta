@@ -8,6 +8,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.CategoriePizza;
@@ -17,12 +18,12 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoFichierImpl implements IPizzaDao {
 
 	private static final String REPERTOIRE_DATA = "Data";
-
+  
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException {
 
-		try {
-			return Files.list(Paths.get(REPERTOIRE_DATA)).map(path -> {
+		try (Stream<Path> s = Files.list(Paths.get(REPERTOIRE_DATA))) {
+			return s.map(path -> {
 				Pizza p = new Pizza();
 				p.setCode(path.getFileName().toString().replaceAll(".txt", ""));
 				try {
