@@ -2,24 +2,22 @@
 
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<artifactId>pizzeria-console-object-java8</artifactId>
-	<modelVersion>4.0.0</modelVersion>	
+	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>fr.pizzeria</groupId>
 		<artifactId>pizzeria-parent</artifactId>
 		<version>0.0.1</version>
 		<relativePath>../pom.xml</relativePath>
-		
+
 	</parent>
-	
+
 	<profiles>
 		<profile>
 			<id>dev</id>
 			<properties>
 				<dao.impl>0</dao.impl>
 			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
+
 		</profile>
 
 		<profile>
@@ -28,13 +26,26 @@
 				<dao.impl>1</dao.impl>
 			</properties>
 		</profile>
+		<profile>
+			<id>bdd</id>
+			<properties>
+				<dao.impl>2</dao.impl>
+				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+				<jdbc.url>jdbc:mysql://localhost:3306/pizzeria-java</jdbc.url>
+				<jdbc.user>pizzeriadb</jdbc.user>
+				<jdbc.pass>pizzeriadb</jdbc.pass>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
 	</profiles>
-	
-	
-		<build>
-		
+
+
+	<build>
+
 		<plugins>
-		
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
@@ -54,17 +65,17 @@
 				<filtering>true</filtering>
 			</resource>
 		</resources>
-		
-		
+
+
 	</build>
-	
+
 	<dependencies>
-		
+
 		<dependency>
 			<groupId>com.github.stefanbirkner</groupId>
 			<artifactId>system-rules</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>fr.pizzeria</groupId>
 			<artifactId>pizzeria-dao</artifactId>
@@ -74,6 +85,6 @@
 			<artifactId>pizzeria-model</artifactId>
 		</dependency>
 	</dependencies>
-	
-	
+
+
 </project>

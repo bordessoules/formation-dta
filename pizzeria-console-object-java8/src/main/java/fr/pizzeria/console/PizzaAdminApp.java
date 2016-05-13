@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.PizzaDaoBdd;
 import fr.pizzeria.dao.PizzaDaoFichierImpl;
 import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.ihm.menu.Menu;
@@ -32,13 +33,22 @@ public class PizzaAdminApp {
 
 		new Pizza().equals(new Pizza());
 		try (Scanner sc = new Scanner(System.in)) {
-			IPizzaDao pizzaDao;
+			IPizzaDao pizzaDao=null;
 			switch (option) {
 			case 0:
 				pizzaDao = new PizzaDaoImpl();
 				break;
 			case 1:
 				pizzaDao = new PizzaDaoFichierImpl();
+				break;
+			case 2:
+				System.out.println("Bdd impl");
+				try {
+					pizzaDao = new PizzaDaoBdd();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 
 			default:

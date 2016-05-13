@@ -16,7 +16,7 @@ public class Pizza {
 	private double prix;
 	private static int nbPizza;
 	private CategoriePizza categorie;
-
+	private int id;
 	public Pizza() {
 		nbPizza++;
 
@@ -94,5 +94,17 @@ public class Pizza {
 	@Override
 	public boolean equals(Object obj) {
 		return EqualsBuilder.reflectionEquals(this, obj);
+	}
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 }
