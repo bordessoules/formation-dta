@@ -8,7 +8,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Pizza {
 
-
 	@ToString(uPPERCASE = true)
 	private String code;
 	@ToString
@@ -22,7 +21,10 @@ public class Pizza {
 		nbPizza++;
 
 	}
-
+	public String toSql() {
+		String retour = " " + this.code + " , " + this.nom + " , " + this.getPrix() + " ," + this.getCategorie().toString();
+		return  retour;
+	}
 	public Pizza(String Code, String Nom, double prix, CategoriePizza cat) {
 		this.code = Code;
 		this.nom = Nom;
@@ -62,6 +64,8 @@ public class Pizza {
 				}).collect(Collectors.joining(" "));
 	}
 
+	
+
 	public CategoriePizza getCategorie() {
 		return categorie;
 	}
@@ -82,13 +86,11 @@ public class Pizza {
 		return nbPizza;
 	}
 
-	
 	@Override
 	public int hashCode() {
-		   return HashCodeBuilder.reflectionHashCode(this);
-		 }
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
 
-	
 	@Override
 	public boolean equals(Object obj) {
 		return EqualsBuilder.reflectionEquals(this, obj);

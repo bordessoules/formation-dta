@@ -7,6 +7,7 @@
 		<groupId>fr.pizzeria</groupId>
 		<artifactId>pizzeria-parent</artifactId>
 		<version>0.0.1</version>
+		<relativePath>../</relativePath>
 	</parent>
 
 	<dependencies>
@@ -14,7 +15,11 @@
 			<groupId>fr.pizzeria</groupId>
 			<artifactId>pizzeria-model</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
 	</dependencies>
-	
+
 
 </project>
