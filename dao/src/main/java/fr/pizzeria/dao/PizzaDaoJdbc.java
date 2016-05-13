@@ -12,11 +12,10 @@ import java.util.ResourceBundle;
 
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.exception.DeletePizzaException;
-import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
-public class PizzaDaoBdd implements IPizzaDao {
+public class PizzaDaoJdbc implements IPizzaDao {
 
 	private String fichier = "jdbc";
 	private String url = "";
@@ -24,7 +23,7 @@ public class PizzaDaoBdd implements IPizzaDao {
 	private String user;
 	private String pass;
 
-	public PizzaDaoBdd() throws ClassNotFoundException {
+	public PizzaDaoJdbc() throws ClassNotFoundException {
 		super();
 		ResourceBundle bundle = ResourceBundle.getBundle(fichier);
 		this.url = bundle.getString("jdbc.url");
@@ -53,6 +52,7 @@ public class PizzaDaoBdd implements IPizzaDao {
 				pizza.setNom(resultats.getString("nom"));
 				pizza.setPrix(resultats.getFloat("prix"));
 				pizza.setId(resultats.getInt("id"));
+				pizzas.add(pizza);
 			}
 		} catch (SQLException e1) {
 			throw new DaoException(e1);
@@ -91,16 +91,33 @@ public class PizzaDaoBdd implements IPizzaDao {
 	}
 
 	@Override
-	public void updatePizza(String codePizza, Pizza pizza)
-			throws UpdatePizzaException, DeletePizzaException, SavePizzaException, DaoException {
-		// TODO Auto-generated method stub
+	public void updatePizza(String codePizza, Pizza updatePizza) throws UpdatePizzaException{
+	try (Connection connection = getConnection(); Statement st = connection.createStatement();) {
+		int nbLignesAffectes = st.executeUpdate(String.format("update pizza set code='%s',nom='%s',prix=%s,categorie='%s' where code='%s'",updatePizza.getCode(), updatePizza.getNom(), updatePizza.getPrix(), updatePizza.getCategorie().name(), codePizza));
 
+		if (nbLignesAffectes == 0) {
+			throw new UpdatePizzaException("Aucune ligne mise à jour en base de données");
+		}
+
+	} catch (SQLException e) {
+		throw new UpdatePizzaException(e);
+	}
 	}
 
 	@Override
-	public void deletePizza(String codePizza) throws DeletePizzaException, DaoException {
-		// TODO Auto-generated method stub
+	public void deletePizza(String codePizza) throws DaoException {
+		try (Connection connection = getConnection(); Statement st = connection.createStatement();) {
+			int nbLignesAffectes = st.executeUpdate(String.format("delete from pizza where code='%s'", codePizza));
+
+			if (nbLignesAffectes == 0) {
+				throw new DeletePizzaException("Aucune ligne supprimée en base de données");
+			}
+
+		} catch (SQLException e) {
+			throw new DeletePizzaException(e);
+		}
 
 	}
+
 
 }

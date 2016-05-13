@@ -17,5 +17,6 @@ public interface IPizzaDao {
 			throws UpdatePizzaException, DeletePizzaException, SavePizzaException, DaoException;
 
 	void deletePizza(String codePizza) throws DeletePizzaException, DaoException;
-
+	
+	
 }

@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoBdd;
+import fr.pizzeria.dao.PizzaDaoJdbc;
 import fr.pizzeria.dao.PizzaDaoFichierImpl;
 import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.ihm.menu.Menu;
@@ -44,7 +44,7 @@ public class PizzaAdminApp {
 			case 2:
 				System.out.println("Bdd impl");
 				try {
-					pizzaDao = new PizzaDaoBdd();
+					pizzaDao = new PizzaDaoJdbc();
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

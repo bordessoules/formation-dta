@@ -45,7 +45,7 @@
       <id>bdd</id>
       <properties>
         <jdbc.url>jdbc:mysql://localhost:3306/pizzeria-java</jdbc.url>
-        <jdbc.driver>com.postgre.jdbc.Driver</jdbc.driver>
+        <jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
         <jdbc.user>pizzeriadb</jdbc.user>
         <dao.impl>2</dao.impl>
         <jdbc.pass>pizzeriadb</jdbc.pass>
