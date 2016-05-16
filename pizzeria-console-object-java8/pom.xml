@@ -19,7 +19,19 @@
 			</properties>
 
 		</profile>
-
+		<profile>
+			<id>JPA</id>
+			<properties>
+				<dao.impl>3</dao.impl>
+				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+				<jdbc.url>jdbc:mysql://localhost:3306/pizzeria-java</jdbc.url>
+				<jdbc.user>pizzeriadb</jdbc.user>
+				<jdbc.pass>pizzeriadb</jdbc.pass>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
 		<profile>
 			<id>prod</id>
 			<properties>
@@ -32,12 +44,10 @@
 				<dao.impl>2</dao.impl>
 				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
 				<jdbc.url>jdbc:mysql://localhost:3306/pizzeria-java</jdbc.url>
-				<jdbc.user>pizzeriadb</jdbc.user>
-				<jdbc.pass>pizzeriadb</jdbc.pass>
+				<jdbc.user>root</jdbc.user>
+				<jdbc.pass></jdbc.pass>
 			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
+
 		</profile>
 	</profiles>
 
@@ -71,6 +81,16 @@
 
 	<dependencies>
 
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+			<version>1.0.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.1.0.Final</version>
+		</dependency>
 		<dependency>
 			<groupId>com.github.stefanbirkner</groupId>
 			<artifactId>system-rules</artifactId>

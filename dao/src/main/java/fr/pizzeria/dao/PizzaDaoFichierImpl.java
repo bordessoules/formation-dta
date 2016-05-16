@@ -70,4 +70,9 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 		}
 	}
 
+	@Override
+	public void saveAllPizza(List<Pizza> pizzas, int nb) throws DaoException {
+		throw new DaoException("méthode non implémentée");		
+	}
+
 }

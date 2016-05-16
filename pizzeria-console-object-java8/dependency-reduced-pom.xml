@@ -36,6 +36,15 @@
       </properties>
     </profile>
     <profile>
+      <id>JPA</id>
+      <properties>
+        <jdbc.url>jdbc:mysql://localhost:3306/pizzeria-java</jdbc.url>
+        <jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+        <jdbc.user>root</jdbc.user>
+        <dao.impl>3</dao.impl>
+      </properties>
+    </profile>
+    <profile>
       <id>prod</id>
       <properties>
         <dao.impl>1</dao.impl>
@@ -46,9 +55,8 @@
       <properties>
         <jdbc.url>jdbc:mysql://localhost:3306/pizzeria-java</jdbc.url>
         <jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
-        <jdbc.user>pizzeriadb</jdbc.user>
+        <jdbc.user>root</jdbc.user>
         <dao.impl>2</dao.impl>
-        <jdbc.pass>pizzeriadb</jdbc.pass>
       </properties>
     </profile>
   </profiles>

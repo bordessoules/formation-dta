@@ -18,5 +18,6 @@ public interface IPizzaDao {
 
 	void deletePizza(String codePizza) throws DeletePizzaException, DaoException;
 	
+	public void saveAllPizza(List<Pizza> pizzas, int nb )throws DaoException;
 	
 }

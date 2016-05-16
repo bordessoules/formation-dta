@@ -11,8 +11,6 @@ import fr.pizzeria.model.Pizza;
 
 public class ModifierPizzaMenuOption extends OptionMenu {
 
-
-	
 	private static final String AJOUTER_PIZZA_LIBELLE_MENU = "Modifier pizzas";
 
 	public ModifierPizzaMenuOption(Scanner scanner, IPizzaDao pizzaDao) {
@@ -20,35 +18,33 @@ public class ModifierPizzaMenuOption extends OptionMenu {
 
 	}
 
-	
 	@Override
 	public boolean execute() {
+		Pizza newPizza = new Pizza();
 		String codeold;
 		System.out.println("entrer code pizza a modifier : ");
 		codeold = sc.next();
-		System.out.println("caracteristique de la nouvelle pizza");
-		String code2, nom, categorie;
-		double prix;
-		System.out.println("Saisir code pizza : ");
-		code2 = sc.next();
-		System.out.println("Saisir nom pizza : ");
-		nom = sc.next();
-		System.out.println("Saisir prix pizza : ");
-		System.out.println("veullez saisir la categorie \n"+Arrays.toString(CategoriePizza.values()));
-		categorie=sc.next();
-		try {
-			prix = sc.nextDouble();
-			Pizza p = new Pizza(code2, nom, prix,CategoriePizza.valueOf(categorie));
+		newPizza.setCode(codeold);
+		System.out.println("Veuillez saisir le nom (sans espace)");
+		newPizza.setNom(sc.next());
+		System.out.println("Veuillez saisir le prix");
 
-			try {
-				pizzaDao.updatePizza(codeold, p);
-			} catch (DaoException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		try {
+			newPizza.setPrix(sc.nextDouble());
+			System.out.println("Veuillez saisir la catégorie");
+			CategoriePizza[] categoriePizzas = CategoriePizza.values();
+			Arrays.asList(categoriePizzas)
+					.forEach(cat -> System.out.println(cat.ordinal() + " -> " + cat.getLibelle()));
+
+			int saisieCategorie = sc.nextInt();
+			newPizza.setCategorie(categoriePizzas[saisieCategorie]);
+
+			pizzaDao.updatePizza(codeold, newPizza);
+			System.out.println(" pizza modifier");
 		} catch (InputMismatchException e) {
-			sc.next();
-			System.err.println("le prix saisie n'etait au bon format");
+			System.err.println("Input " + sc.next() + " n'est pas un nombre");
+		} catch (DaoException e) {
+			System.err.println("Echec de la modification de la pizza");
 		}
 
 		return true;

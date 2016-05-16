@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.UpdatePizzaException;
@@ -66,6 +67,12 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 		}
 
+	}
+
+
+	@Override
+	public void saveAllPizza(List<Pizza> pizzas, int nb) throws DaoException {
+		throw new DaoException("méthode non implémentée");		
 	}
 
 	

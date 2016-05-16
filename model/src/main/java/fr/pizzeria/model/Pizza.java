@@ -3,11 +3,21 @@ package fr.pizzeria.model;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+@Entity
 public class Pizza {
 
+	@Column(name = "code", length = 3, nullable = false, unique = true)
 	@ToString(uPPERCASE = true)
 	private String code;
 	@ToString
@@ -15,16 +25,19 @@ public class Pizza {
 	@ToString
 	private double prix;
 	private static int nbPizza;
+	@Enumerated(EnumType.STRING)
 	private CategoriePizza categorie;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	public Pizza() {
-		nbPizza++;
 
 	}
 	public String toSql() {
 		String retour = " " + this.code + " , " + this.nom + " , " + this.getPrix() + " ," + this.getCategorie().toString();
 		return  retour;
 	}
+	
 	public Pizza(String Code, String Nom, double prix, CategoriePizza cat) {
 		this.code = Code;
 		this.nom = Nom;
@@ -63,8 +76,6 @@ public class Pizza {
 					}
 				}).collect(Collectors.joining(" "));
 	}
-
-	
 
 	public CategoriePizza getCategorie() {
 		return categorie;
@@ -106,5 +117,11 @@ public class Pizza {
 	 */
 	public void setId(int id) {
 		this.id = id;
+	}
+	/**
+	 * @param nbPizza the nbPizza to set
+	 */
+	public static void setNbPizza(int nbPizza) {
+		Pizza.nbPizza = nbPizza;
 	}
 }

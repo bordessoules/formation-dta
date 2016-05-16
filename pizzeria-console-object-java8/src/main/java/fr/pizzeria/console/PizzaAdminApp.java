@@ -3,9 +3,14 @@ package fr.pizzeria.console;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.logging.Level;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoJdbc;
+import fr.pizzeria.dao.PizzaDaoJpa;
 import fr.pizzeria.dao.PizzaDaoFichierImpl;
 import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.ihm.menu.Menu;
@@ -50,6 +55,13 @@ public class PizzaAdminApp {
 					e.printStackTrace();
 				}
 				break;
+			case 3:
+				System.out.println("Jpa impl");	
+				java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
+				EntityManagerFactory emf = Persistence.createEntityManagerFactory("pizzeria-console-object-java8");//nom present ds le persitence.xml
+				pizzaDao = new PizzaDaoJpa(emf);
+				break;
+
 
 			default:
 				System.err.println("dao non configuré regarder application.properties");
