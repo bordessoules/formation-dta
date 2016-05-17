@@ -26,7 +26,7 @@ public class PizzaDaoImplTest {
 	public void setUp() throws Exception {
 		dao = new PizzaDaoImpl();
 		listePizzasInitiales = new ArrayList<Pizza>();
-		//gerer l'ajout des pizza par fichier sans utilis� findall
+		//gerer l'ajout des pizza par fichier sans utiliser findall
 		listePizzasInitiales.add(new Pizza("PEP", "Pépéroni", 12.50,CategoriePizza.VIANDE));
 		listePizzasInitiales.add(new Pizza("MAR","Margherita", 14.00,CategoriePizza.SANS_VIANDE));
 		listePizzasInitiales.add(new Pizza("REI","La Reine", 11.50,CategoriePizza.VIANDE));
@@ -36,7 +36,7 @@ public class PizzaDaoImplTest {
 		listePizzasInitiales.add(new Pizza("ORI", "L'orientale", 13.50,CategoriePizza.VIANDE));
 		listePizzasInitiales.add(new Pizza("IND", "L'indienne", 14.00,CategoriePizza.VIANDE));
 		/*
-		listePizzasInitiales.add(new Pizza("PEP", "P�p�roni", 12.50, CategoriePizza.VIANDE));
+		listePizzasInitiales.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
 		listePizzasInitiales.add(new Pizza("MAR", "Margherita", 14.00, CategoriePizza.SANS_VIANDE));
 		
 		listePizzasInitiales.add(new Pizza("REI", "La Reine", 11.50, CategoriePizza.VIANDE));
@@ -48,7 +48,7 @@ public class PizzaDaoImplTest {
 		listePizzasInitiales.add(new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.VIANDE));
 		listePizzasInitiales.add(new Pizza("IND", "L'indienne", 14.00, CategoriePizza.VIANDE));
 		
-		listePizzasInitiales.add(new Pizza("SAU", "La Saumon�ta", 14.00, CategoriePizza.POISSON));
+		listePizzasInitiales.add(new Pizza("SAU", "La Saumonéta", 14.00, CategoriePizza.POISSON));
 		*/
 		listePizzasInitiales.sort(Comparator.comparing(Pizza::getCode));
 	}
