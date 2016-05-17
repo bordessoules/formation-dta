@@ -26,7 +26,7 @@ public class Pizza {
 	@Column(name = "prix",  nullable = false )
 	@ToString
 	private double prix;
-	private static Integer nbPizza;
+	private static int nbPizza;
 	
 	@Column(name = "categorie",  nullable = false )
 	@Enumerated(EnumType.STRING)
@@ -101,7 +101,7 @@ public class Pizza {
 		return prix;
 	}
 
-	public static Integer getNbPizza() {
+	public static int getNbPizza() {
 		return nbPizza;
 	}
 
