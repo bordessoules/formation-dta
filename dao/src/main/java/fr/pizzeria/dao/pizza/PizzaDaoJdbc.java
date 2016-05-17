@@ -1,4 +1,4 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.dao.pizza;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -31,6 +31,16 @@ public class PizzaDaoJdbc implements IPizzaDao {
 		this.user = bundle.getString("jdbc.user");
 		this.pass = bundle.getString("jdbc.pass");
 		Class.forName(driver);
+	}
+	public PizzaDaoJdbc(String driver, String url, String user, String pass) throws DaoException {
+		try {
+			Class.forName(driver);
+			this.url = url;
+			this.user = user;
+			this.pass = pass;
+		} catch (ClassNotFoundException e) {
+			throw new DaoException(e);
+		}
 	}
 
 	private Connection getConnection() throws SQLException {

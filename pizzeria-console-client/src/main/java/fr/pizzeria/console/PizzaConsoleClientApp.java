@@ -1,10 +1,23 @@
 package fr.pizzeria.console;
 
+import java.util.Scanner;
+
+import fr.pizzeria.ihm.menu.Menu;
+import fr.pizzeria.ihm.menu.option.QuitterOptionMenu;
+
 public class PizzaConsoleClientApp {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	
+	private PizzaConsoleClientApp() {
+		super();
 	}
 
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Menu menu = new Menu(null, new QuitterOptionMenu(), "client console", sc);
+
+		menu.afficher();
+	}
+
+	
 }
