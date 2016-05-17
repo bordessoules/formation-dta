@@ -12,9 +12,6 @@ import javax.persistence.TypedQuery;
 import org.apache.commons.collections4.ListUtils;
 
 import fr.pizzeria.exception.DaoException;
-import fr.pizzeria.exception.DeletePizzaException;
-import fr.pizzeria.exception.SavePizzaException;
-import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoJpa implements IPizzaDao {
@@ -35,7 +32,7 @@ public class PizzaDaoJpa implements IPizzaDao {
 	}
 
 	@Override
-	public void saveNewPizza(Pizza pizza) throws SavePizzaException, DaoException {
+	public void saveNewPizza(Pizza pizza) throws  DaoException {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
@@ -44,6 +41,7 @@ public class PizzaDaoJpa implements IPizzaDao {
 			et.commit();//
 		} catch (Exception e) {
 			et.rollback();
+			throw new DaoException(e);
 		} finally {
 			em.close();
 		}
@@ -52,7 +50,7 @@ public class PizzaDaoJpa implements IPizzaDao {
 
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza)
-			throws UpdatePizzaException, DeletePizzaException, SavePizzaException, DaoException {
+			throws  DaoException {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
@@ -63,11 +61,11 @@ public class PizzaDaoJpa implements IPizzaDao {
 			p.setNom(pizza.getNom());
 			p.setCategorie(pizza.getCategorie());
 			p.setPrix(pizza.getPrix());
-			//em.merge(p);
 			et.commit();//
 		} catch (Exception e) {
 			et.rollback();
 			System.err.println("la transaction a echoué!!!");
+			throw new DaoException(e);
 		} finally {
 			em.close();
 		}
@@ -75,7 +73,7 @@ public class PizzaDaoJpa implements IPizzaDao {
 	}
 
 	@Override
-	public void deletePizza(String codePizza) throws DeletePizzaException, DaoException {
+	public void deletePizza(String codePizza) throws  DaoException {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
@@ -87,10 +85,12 @@ public class PizzaDaoJpa implements IPizzaDao {
 		} catch (Exception e) {
 			et.rollback();
 			System.err.println("la transaction a echoué!!!");
+			throw new DaoException(e);
 		} finally {
 			em.close();
 		}
 	}
+	@Override
 	public void saveAllPizza(List<Pizza> pizzas, int nb )throws DaoException{
 		EntityManager em = emf.createEntityManager();
 		pizzas.sort(Comparator.comparing(Pizza::getCode));

@@ -20,24 +20,32 @@ public class Pizza {
 	@Column(name = "code", length = 3, nullable = false, unique = true)
 	@ToString(uPPERCASE = true)
 	private String code;
+	@Column(name = "nom", length = 32, nullable = false )
 	@ToString
 	private String nom;
+	@Column(name = "prix",  nullable = false )
 	@ToString
 	private double prix;
-	private static int nbPizza;
+	private static Integer nbPizza;
+	
+	@Column(name = "categorie",  nullable = false )
 	@Enumerated(EnumType.STRING)
 	private CategoriePizza categorie;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id",  nullable = false )
+	private Integer id;
+	@Column(name = "urlImage",  nullable = true )
+	private String urlImage;
 	public Pizza() {
+		super();
+	}
 
-	}
 	public String toSql() {
-		String retour = " " + this.code + " , " + this.nom + " , " + this.getPrix() + " ," + this.getCategorie().toString();
-		return  retour;
+		return  " " + this.code + " , " + this.nom + " , " + this.getPrix() + " ,"
+				+ this.getCategorie().toString();
 	}
-	
+
 	public Pizza(String Code, String Nom, double prix, CategoriePizza cat) {
 		this.code = Code;
 		this.nom = Nom;
@@ -93,7 +101,7 @@ public class Pizza {
 		return prix;
 	}
 
-	public static int getNbPizza() {
+	public static Integer getNbPizza() {
 		return nbPizza;
 	}
 
@@ -106,22 +114,27 @@ public class Pizza {
 	public boolean equals(Object obj) {
 		return EqualsBuilder.reflectionEquals(this, obj);
 	}
+
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
+
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	/**
-	 * @param nbPizza the nbPizza to set
+	 * @param nbPizza
+	 *            the nbPizza to set
 	 */
-	public static void setNbPizza(int nbPizza) {
+	public static void setNbPizza(Integer nbPizza) {
 		Pizza.nbPizza = nbPizza;
 	}
 }
