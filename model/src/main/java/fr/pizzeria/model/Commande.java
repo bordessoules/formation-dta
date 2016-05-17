@@ -1,10 +1,12 @@
 package fr.pizzeria.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Commande {
@@ -22,16 +26,16 @@ public class Commande {
 	private Integer id;
 	@Column(name = "numero_commande",  nullable = false, unique = false)
 	private Integer numero_commande;
-	@Enumerated
+	@Enumerated(EnumType.STRING )
 	@Column(name = "statut",  nullable = false, unique = false)
 	private StatutCommande statut;
-	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date_commande",  nullable = false, unique = false)
 	private Date date_commande;
 	@ManyToOne(optional=false)
 	@JoinColumn(name="livreur_id", nullable=false, updatable=false)
 	private Livreur livreur;	
-	@ManyToOne
+	@ManyToOne(optional=false)
     @JoinColumn(name="client_id", nullable=false)
 	private Client client;
 	@ManyToMany
@@ -42,7 +46,7 @@ public class Commande {
         @JoinColumn(name="pizza_id", referencedColumnName="id")
     )
 	@Column(name = "pizzas",  nullable = false, unique = false)
-	private List<Pizza> pizzas;
+	private List<Pizza> pizzas= new ArrayList<>();
 	public Commande() {
 		super();
 	}

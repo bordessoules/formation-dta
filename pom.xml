@@ -75,6 +75,17 @@
 	<dependencyManagement>
 
 		<dependencies>
+			
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+			<version>1.0.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.1.0.Final</version>
+		</dependency>
 			<dependency>
 				<groupId>fr.pizzeria</groupId>
 				<artifactId>pizzeria-model</artifactId>
@@ -137,5 +148,6 @@
 		<module>pizzeria-console-object-java8</module>
 		<module>dao</module>
 		<module>model</module>
+		<module>pizzeria-console-client</module>
 	</modules>
 </project>

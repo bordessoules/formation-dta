@@ -9,8 +9,8 @@ public abstract class OptionMenu {
 	protected IDaoFactory fact;
 	protected Scanner sc;
 
-	public OptionMenu(String ajouterPizzaLibelleMenu, IDaoFactory fact, Scanner scanner) {
-		this.libelle = ajouterPizzaLibelleMenu;
+	public OptionMenu(String ajouterLibelleMenu, IDaoFactory fact, Scanner scanner) {
+		this.libelle = ajouterLibelleMenu;
 		this.fact = fact;
 		this.sc = scanner;
 	}

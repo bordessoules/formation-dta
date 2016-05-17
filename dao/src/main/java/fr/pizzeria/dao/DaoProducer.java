@@ -11,7 +11,7 @@ import fr.pizzeria.exception.DaoException;
 
 public interface DaoProducer {
 
-	public default  IDaoFactory getDaoFactoryJpa(EntityManagerFactory emf) throws DaoException {
+	public static IDaoFactory getDaoFactoryJpa(EntityManagerFactory emf) throws DaoException {
 		return new GeneriqueDaoFactory(new PizzaDaoJpa(emf), new ClientDaoJpa(emf));
 	}
 	
