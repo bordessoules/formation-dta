@@ -2,16 +2,16 @@ package fr.pizzeria.ihm.menu.option;
 
 import java.util.Scanner;
 
-import fr.pizzeria.dao.pizza.IPizzaDao;
+import fr.pizzeria.dao.IDaoFactory;
 
 public abstract class OptionMenu {
 	protected String libelle;
-	protected IPizzaDao pizzaDao;
+	protected IDaoFactory fact;
 	protected Scanner sc;
 
-	public OptionMenu(String ajouterPizzaLibelleMenu, IPizzaDao pizzaDao2, Scanner scanner) {
+	public OptionMenu(String ajouterPizzaLibelleMenu, IDaoFactory fact, Scanner scanner) {
 		this.libelle = ajouterPizzaLibelleMenu;
-		this.pizzaDao = pizzaDao2;
+		this.fact = fact;
 		this.sc = scanner;
 	}
 

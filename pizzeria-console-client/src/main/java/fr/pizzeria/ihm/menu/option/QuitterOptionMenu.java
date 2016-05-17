@@ -1,8 +1,5 @@
 package fr.pizzeria.ihm.menu.option;
 
-import java.util.Scanner;
-
-import fr.pizzeria.dao.pizza.IPizzaDao;
 
 public class QuitterOptionMenu extends OptionMenu {
 
