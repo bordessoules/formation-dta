@@ -146,4 +146,18 @@ public class Pizza {
 	public static void setNbPizza(Integer nbPizza) {
 		Pizza.nbPizza = nbPizza;
 	}
+
+	/**
+	 * @return the urlImage
+	 */
+	public String getUrlImage() {
+		return urlImage;
+	}
+
+	/**
+	 * @param urlImage the urlImage to set
+	 */
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
+	}
 }
