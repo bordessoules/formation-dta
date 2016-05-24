@@ -54,6 +54,15 @@ public class Pizza {
 		Pizza.nbPizza++;
 
 	}
+	public Pizza(String Code, String Nom, double prix, CategoriePizza cat, String urlImage) {
+		this.code = Code;
+		this.nom = Nom;
+		this.prix = prix;
+		this.categorie = cat;
+		this.urlImage=urlImage;
+		Pizza.nbPizza++;
+
+	}
 
 	public void setCode(String code) {
 		this.code = code;
