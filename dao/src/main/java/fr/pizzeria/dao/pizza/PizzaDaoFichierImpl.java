@@ -18,7 +18,7 @@ import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 @Named
-@ApplicationScoped
+//@ApplicationScoped
 public class PizzaDaoFichierImpl implements IPizzaDao {
 
 	private static final String REPERTOIRE_DATA = "Data";

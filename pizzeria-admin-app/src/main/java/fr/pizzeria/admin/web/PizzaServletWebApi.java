@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,11 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
-import fr.pizzeria.admin.metier.PizzaService;
-import fr.pizzeria.dao.pizza.IPizzaDao;
-import fr.pizzeria.dao.pizza.PizzaDaoImpl;
+import fr.pizzeria.admin.metier.PizzaServiceJpa;
 import fr.pizzeria.exception.DaoException;
-import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -28,7 +24,7 @@ public class PizzaServletWebApi extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOG = Logger.getLogger(PizzaServletWebApi.class.toString());
 	@Inject
-	private PizzaService pizzaDao;
+	private PizzaServiceJpa pizzaDao;
 
 	/**
 	 * @see HttpServlet#HttpServlet()

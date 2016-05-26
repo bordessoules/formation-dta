@@ -18,6 +18,7 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoJpa implements IPizzaDao {
 	private EntityManagerFactory emf;
 
+	
 	public PizzaDaoJpa(EntityManagerFactory emf) {
 		super();
 		this.emf = emf;

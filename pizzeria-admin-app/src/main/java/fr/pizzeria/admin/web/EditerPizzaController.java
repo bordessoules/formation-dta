@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 
 import fr.pizzeria.admin.metier.PizzaService;
+import fr.pizzeria.admin.metier.PizzaServiceJpa;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
@@ -27,7 +28,7 @@ public class EditerPizzaController extends HttpServlet {
 	private static final Logger LOG = Logger.getLogger(PizzaServletWebApi.class.toString());
 
 	@Inject
-	private PizzaService pizzaDao;
+	private PizzaServiceJpa pizzaDao;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
