@@ -10,11 +10,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
+
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-
+@Named
+@ApplicationScoped
 public class PizzaDaoFichierImpl implements IPizzaDao {
 
 	private static final String REPERTOIRE_DATA = "Data";

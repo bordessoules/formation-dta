@@ -10,8 +10,21 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.12</junit.version>
 		<system-rules.version>1.16.0</system-rules.version>
-		<servlet-version>3.1.0</servlet-version>
+		<servlet.version>3.1.0</servlet.version>
+		<jstl.version>1.2</jstl.version>
+		<cdi-api.version>1.2</cdi-api.version>
 	</properties>
+
+
+	<modules>
+		<module>pizzeria-console-object-java8</module>
+		<module>dao</module>
+		<module>model</module>
+		<module>pizzeria-console-client</module>
+		<module>pizzeria-admin-app</module>
+	</modules>
+
+
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -76,10 +89,26 @@
 	<dependencyManagement>
 
 		<dependencies>
+
+			<dependency>
+				<groupId>javax.enterprise</groupId>
+				<artifactId>cdi-api</artifactId>
+				<version>${cdi-api.version}</version>
+				<scope>provided</scope>
+				
+			</dependency>
+
+			<dependency>
+				<groupId>jstl</groupId>
+				<artifactId>jstl</artifactId>
+				<version>${jstl.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
-				<version>${servlet-version}</version>
+				<version>${servlet.version}</version>
 				<scope>provided</scope>
 			</dependency>
 
@@ -142,7 +171,6 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-
 		</dependency>
 
 	</dependencies>
@@ -151,11 +179,4 @@
 
 
 
-	<modules>
-		<module>pizzeria-console-object-java8</module>
-		<module>dao</module>
-		<module>model</module>
-		<module>pizzeria-console-client</module>
-		<module>pizzeria-admin-app</module>
-	</modules>
 </project>

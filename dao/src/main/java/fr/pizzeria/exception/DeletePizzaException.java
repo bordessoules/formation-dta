@@ -2,6 +2,11 @@ package fr.pizzeria.exception;
 
 public class DeletePizzaException extends DaoException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7621948894554618639L;
+
 	public DeletePizzaException() {
 		super();
 		// TODO Auto-generated constructor stub

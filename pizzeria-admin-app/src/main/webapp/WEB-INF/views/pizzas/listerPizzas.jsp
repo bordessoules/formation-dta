@@ -2,6 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="fr.pizzeria.model.Pizza"%>
 <%@ page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false"%>
 
 <!DOCTYPE html>
 <html>
@@ -22,23 +24,19 @@
 				<th>Image</th>
 			</tr>
 		</thead>
-		<%
-			List<Pizza> pizzas = (List<Pizza>) request.getAttribute("listePizzas");
-			for (Pizza p : pizzas) {
-		%>
+		<c:forEach var= "p" items="${listePizzas }">
+		
 		<tr>
-			<td><%=p.getId()%></td>
-			<td><%=p.getCode()%></td>
-			<td><%=p.getNom()%></td>
-			<td><%=p.getPrix()%></td>
-			<td><%=p.getCategorie()%></td>
-			<td><img alt="photo" src="<%=p.getUrlImage()%>"></td>
-			<td><a href="edit?code=<%=p.getCode()%>"><button type="button">Editer</button></a></td>
-			<td><a href="delete?code=<%=p.getCode()%>"><button type="button">Supprimer</button></a></td>
+			<td>${p.id }</td>
+			<td>${p.code }</td>
+			<td>${p.nom }</td>
+			<td>${p.prix }</td>
+			<td>${p.categorie }</td>
+			<td><img alt="photo" src="${p.urlImage }"></td>
+			<td><a href="edit?code=${p.code }"><button type="button">Editer</button></a></td>
+			<td><a href="delete?code=${p.code }"><button type="button">Supprimer</button></a></td>
 		</tr>
-		<%
-			}
-		%>
+		</c:forEach>
 	</table>
 </body>
 </html>

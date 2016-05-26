@@ -3,36 +3,76 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-  	<servlet-name>PizzaServletWebApi</servlet-name>
-  	<display-name>PizzaServletWebApi</display-name>
-  	<description></description>
-  	<servlet-class>fr.pizzeria.admin.web.PizzaServletWebApi</servlet-class>
-  </servlet>
-  <servlet>
-  	<servlet-name>ListerPizzaControler</servlet-name>
-  	<display-name>ListerPizzaControler</display-name>
-  	<description></description>
-  	<servlet-class>fr.pizzeria.admin.web.ListerPizzaControler</servlet-class>
-  </servlet>
-  <servlet>
-  	<servlet-name>EditerPizzaController</servlet-name>
-  	<display-name>EditerPizzaController</display-name>
-  	<description></description>
-  	<servlet-class>fr.pizzeria.admin.web.EditerPizzaController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>PizzaServletWebApi</servlet-name>
-  	<url-pattern>/api/servlet/pizzas</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-  	<servlet-name>ListerPizzaControler</servlet-name>
-  	<url-pattern>/pizzas/list</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-  	<servlet-name>EditerPizzaController</servlet-name>
-  	<url-pattern>/pizzas/edit</url-pattern>
-  </servlet-mapping>
- 
+	<display-name>Archetype Created Web Application</display-name>
+	<filter>
+		<filter-name>AuthFilter</filter-name>
+		<display-name>AuthFilter</display-name>
+		<description></description>
+		<filter-class>fr.pizzeria.admin.web.AuthFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AuthFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+<!-- 	<filter>
+
+		<filter-name>AuthFilter</filter-name>
+
+		<filter-class>test.AuthFilter</filter-class>
+
+	</filter>
+
+	<filter-mapping>
+
+		<filter-name>AuthFilter</filter-name>
+
+		<url-pattern>/*</url-pattern>
+
+	</filter-mapping>
+	 -->
+	<servlet>
+		<servlet-name>PizzaServletWebApi</servlet-name>
+		<display-name>PizzaServletWebApi</display-name>
+		<description></description>
+		<servlet-class>fr.pizzeria.admin.web.PizzaServletWebApi</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ListerPizzaControler</servlet-name>
+		<display-name>ListerPizzaControler</display-name>
+		<description></description>
+		<servlet-class>fr.pizzeria.admin.web.ListerPizzaControler</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>EditerPizzaController</servlet-name>
+		<display-name>EditerPizzaController</display-name>
+		<description></description>
+		<servlet-class>fr.pizzeria.admin.web.EditerPizzaController</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>LoginPizzaController</servlet-name>
+		<display-name>LoginPizzaController</display-name>
+		<description></description>
+		<servlet-class>fr.pizzeria.admin.web.LoginPizzaController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PizzaServletWebApi</servlet-name>
+		<url-pattern>/api/servlet/pizzas</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ListerPizzaControler</servlet-name>
+		<url-pattern>/pizzas/list</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>EditerPizzaController</servlet-name>
+		<url-pattern>/pizzas/edit</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>LoginPizzaController</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
+
+
 </web-app>

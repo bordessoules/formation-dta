@@ -3,6 +3,7 @@ package fr.pizzeria.dao.pizza;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -13,7 +14,7 @@ import org.apache.commons.collections4.ListUtils;
 
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.Pizza;
-
+@Named
 public class PizzaDaoJpa implements IPizzaDao {
 	private EntityManagerFactory emf;
 

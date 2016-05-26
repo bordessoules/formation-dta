@@ -10,11 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.inject.Named;
+
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
-
+@Named
 public class PizzaDaoJdbc implements IPizzaDao {
 
 	private String fichier = "jdbc";
