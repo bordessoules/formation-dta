@@ -41,7 +41,7 @@ public class AuthFilter implements Filter {
 		HttpServletRequest req=(HttpServletRequest) request;
 		HttpServletResponse resp=(HttpServletResponse) response;
 		Object t = req.getSession().getAttribute("isLogged");
-		if ( (null!=t) && (boolean)t || req.getRequestURI().contains("/login")){
+		if ( req.getRequestURI().contains("/api") || (null!=t) && (boolean)t || req.getRequestURI().contains("/login")){
 			chain.doFilter(req, resp);
 		}
 		else{

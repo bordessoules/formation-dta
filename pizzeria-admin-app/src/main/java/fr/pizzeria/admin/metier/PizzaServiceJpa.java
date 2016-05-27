@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -38,10 +37,11 @@ public class PizzaServiceJpa {
 		TypedQuery<Pizza> q = em.createQuery("SELECT p FROM Pizza p WHERE p.code=:code", Pizza.class)
 				.setParameter("code", codePizza);
 		Pizza p = q.getSingleResult();
-		p.setNom(pizza.getNom());
-		p.setCategorie(pizza.getCategorie());
-		p.setPrix(pizza.getPrix());
-
+		if (p != null) {
+			p.setNom(pizza.getNom());
+			p.setCategorie(pizza.getCategorie());
+			p.setPrix(pizza.getPrix());
+		}
 	}
 
 	public void deletePizza(String codePizza) throws DaoException {

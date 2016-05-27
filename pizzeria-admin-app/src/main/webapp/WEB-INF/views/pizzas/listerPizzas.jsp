@@ -8,7 +8,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
 <title>Liste des pizzas</title>
 </head>
 <body>
@@ -24,9 +27,10 @@
 				<th>Image</th>
 			</tr>
 		</thead>
+		
 		<c:forEach var= "p" items="${listePizzas }">
 		
-		<tr>
+		<tr id="tr-${p.code }">
 			<td>${p.id }</td>
 			<td>${p.code }</td>
 			<td>${p.nom }</td>
@@ -34,9 +38,23 @@
 			<td>${p.categorie }</td>
 			<td><img alt="photo" src="${p.urlImage }"></td>
 			<td><a href="edit?code=${p.code }"><button type="button">Editer</button></a></td>
-			<td><a href="delete?code=${p.code }"><button type="button">Supprimer</button></a></td>
+			<td><button type="button" onclick="supprimer('${p.code }')">Supprimer</button></td>
 		</tr>
 		</c:forEach>
 	</table>
+	<script type="text/javascript">
+	function supprimer(code){
+		url = ' <%=request.getContextPath() %>/pizzas/delete'+"?code=" +code;
+		alert(url);
+		$.ajax({
+			type : "DELETE",
+			url : url,
+			success :function(){
+				$("#tr-"+code).remove();
+			}
+		})
+	}
+	
+	</script>
 </body>
 </html>

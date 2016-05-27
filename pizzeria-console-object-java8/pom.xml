@@ -28,9 +28,7 @@
 				<jdbc.user>pizzeriadb</jdbc.user>
 				<jdbc.pass>pizzeriadb</jdbc.pass>
 			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
+			
 		</profile>
 		<profile>
 			<id>prod</id>
@@ -49,6 +47,18 @@
 			</properties>
 
 		</profile>
+		<profile>
+			<id>http</id>
+			<properties>
+				<dao.impl>4</dao.impl>
+				
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			</profile>
+		
+		
 	</profiles>
 
 
@@ -80,6 +90,17 @@
 	</build>
 
 	<dependencies>
+
+	
+		
+		
+
+
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>

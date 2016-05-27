@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 
 import fr.pizzeria.dao.pizza.IPizzaDao;
 import fr.pizzeria.dao.pizza.PizzaDaoFichierImpl;
+import fr.pizzeria.dao.pizza.PizzaDaoHTTP;
 import fr.pizzeria.dao.pizza.PizzaDaoImpl;
 import fr.pizzeria.dao.pizza.PizzaDaoJdbc;
 import fr.pizzeria.dao.pizza.PizzaDaoJpa;
@@ -61,7 +62,10 @@ public class PizzaAdminApp {
 				EntityManagerFactory emf = Persistence.createEntityManagerFactory("pizzeria-console-object-java8");//nom present ds le persitence.xml
 				pizzaDao = new PizzaDaoJpa(emf);
 				break;
-
+			case 4:
+				System.out.println("Http impl");	
+				pizzaDao = new PizzaDaoHTTP();
+				break;
 
 			default:
 				System.err.println("dao non configuré regarder application.properties");

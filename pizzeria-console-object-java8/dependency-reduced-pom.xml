@@ -60,6 +60,12 @@
         <dao.impl>2</dao.impl>
       </properties>
     </profile>
+    <profile>
+      <id>http</id>
+      <properties>
+        <dao.impl>4</dao.impl>
+      </properties>
+    </profile>
   </profiles>
   <dependencies>
     <dependency>

@@ -55,6 +55,12 @@
 		<description></description>
 		<servlet-class>fr.pizzeria.admin.web.LoginPizzaController</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>DeletePizzaControler</servlet-name>
+		<display-name>DeletePizzaControler</display-name>
+		<description></description>
+		<servlet-class>fr.pizzeria.admin.web.DeletePizzaControler</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>PizzaServletWebApi</servlet-name>
 		<url-pattern>/api/servlet/pizzas</url-pattern>
@@ -71,6 +77,10 @@
 	<servlet-mapping>
 		<servlet-name>LoginPizzaController</servlet-name>
 		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DeletePizzaControler</servlet-name>
+		<url-pattern>/pizzas/delete</url-pattern>
 	</servlet-mapping>
 	
 
