@@ -6,7 +6,7 @@ import fr.pizzeria.model.Client;
 public class ClientDaoImpl implements IClientDao {
 
 	@Override
-	public void saveClient(Client client) {
+	public void saveClient(Client client) throws DaoException {
 		// TODO Auto-generated method stub
 		
 	}

@@ -3,7 +3,9 @@ package fr.pizzeria.dao.pizza;
 import java.util.List;
 
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
 
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.exception.DeletePizzaException;
@@ -25,6 +27,11 @@ public class PizzaDaoHTTP implements IPizzaDao {
 
 	@Override
 	public void saveNewPizza(Pizza pizza) throws SavePizzaException, DaoException {
+		ClientBuilder.newClient()
+        .target("http://localhost:8080/pizzeria-admin-app")
+        .path("api").path("pizzas")
+        .request().post(Entity.entity(pizza, MediaType.APPLICATION_JSON));
+		
 		// TODO Auto-generated method stub
 
 	}
@@ -32,14 +39,18 @@ public class PizzaDaoHTTP implements IPizzaDao {
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza)
 			throws UpdatePizzaException, DeletePizzaException, SavePizzaException, DaoException {
-		// TODO Auto-generated method stub
-
+		ClientBuilder.newClient()
+        .target("http://localhost:8080/pizzeria-admin-app")
+        .path("api").path("pizzas")
+        .request().put(Entity.entity(pizza, MediaType.APPLICATION_JSON));
 	}
 
 	@Override
 	public void deletePizza(String codePizza) throws DeletePizzaException, DaoException {
-		// TODO Auto-generated method stub
-
+		ClientBuilder.newClient()
+        .target("http://localhost:8080/pizzeria-admin-app")
+        .path("api").path("pizzas").path(codePizza)
+        .request().delete();
 	}
 
 	@Override

@@ -96,16 +96,6 @@
 				<version>2.23</version>
 			</dependency>
 
-<!--
-			<dependency>
-				<groupId>com.sun.jersey</groupId>
-				<artifactId>jersey-json</artifactId>
-				<version>1.19.1</version>
-				<scope>provided</scope>
-			</dependency>
-
-
-			 http://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-client -->
 			<dependency>
 				<groupId>org.glassfish.jersey.core</groupId>
 				<artifactId>jersey-client</artifactId>
