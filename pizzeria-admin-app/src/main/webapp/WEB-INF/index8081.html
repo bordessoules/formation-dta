@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquerry/1.12.2/jquery.min.js"></script>
+</head>
+<body>
+	<h1>TEST Cors</h1>
+	<script>
+		$.get("http://localhost:8080/pizzeria-admin-app/api/pizzas",
+				function(data) {
+					console.log("success", data);
+				}).fail(function(err) {
+			console.log("error", err);
+		});
+	</script>
+</body>
+</html>
