@@ -10,13 +10,22 @@ import fr.pizzeria.ihm.menu.option.OptionMenu;
 
 public class Menu {
 	private String title;
-	Map<Integer, OptionMenu> actions;
+	Map<Integer, OptionMenu> actions = new TreeMap<>();
 	private Scanner scan;
-	IPizzaDao dao;
-	public Menu(OptionMenu menuExit,String title, Scanner scan, OptionMenu... menus) {
+	private IPizzaDao dao;
+
+	public Menu(Scanner scan, IPizzaDao dao) {
+		super();
+		this.title = "pizzeria administration";
+		this.scan = scan;
+		this.dao = dao;
+
+	}
+
+	public Menu(OptionMenu menuExit, String title, Scanner scan, OptionMenu... menus) {
 		this.title = title;
 		this.scan = scan;
-		this.actions = new TreeMap<>();
+		// this.actions = new TreeMap<>();
 		for (int i = 0; i < menus.length; i++) {
 			this.actions.put(i, menus[i]);
 
@@ -24,26 +33,26 @@ public class Menu {
 		this.actions.put(99, menuExit);
 	}
 
-	public Menu(IPizzaDao dao,OptionMenu menuExit,String title, Scanner scan, OptionMenu... menus) {
-		this.dao=dao;
+	public Menu(IPizzaDao dao, OptionMenu menuExit, String title, Scanner scan, OptionMenu... menus) {
+		this.dao = dao;
 		this.title = title;
 		this.scan = scan;
-		this.actions = new TreeMap<>();
+		// this.actions = new TreeMap<>();
 		for (int i = 0; i < menus.length; i++) {
 			this.actions.put(i, menus[i]);
 
 		}
 		this.actions.put(99, menuExit);
 	}
-	
+
 	public void afficher() {
 		int choice;
 		boolean arret = true;
 		do {
 			System.out.println("****** " + title + " ******");
-			actions.entrySet().stream().
-			forEach(optionMenuEntry -> System.out.println(optionMenuEntry.getKey() + ". "+optionMenuEntry.getValue().getLibelle()));
-			
+			actions.entrySet().stream().forEach(optionMenuEntry -> System.out
+					.println(optionMenuEntry.getKey() + ". " + optionMenuEntry.getValue().getLibelle()));
+
 			System.out.println("faites votre choix");
 			try {
 				choice = this.scan.nextInt();
@@ -55,4 +64,21 @@ public class Menu {
 
 		} while (arret);
 	}
+
+	public void setActions(OptionMenu menuExit, OptionMenu... menus) {
+		for (int i = 0; i < menus.length; i++) {
+			this.actions.put(i, menus[i]);
+
+		}
+		this.actions.put(99, menuExit);
+	}
+
+	public Scanner getScan() {
+		return scan;
+	}
+
+	public IPizzaDao getDao() {
+		return dao;
+	}
+
 }
