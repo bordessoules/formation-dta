@@ -12,6 +12,8 @@ import java.util.ResourceBundle;
 
 import javax.inject.Named;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.UpdatePizzaException;
@@ -20,7 +22,7 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoJdbc implements IPizzaDao {
 
 	private String fichier = "jdbc";
-	private String url = "";
+	private String url ;
 	private String driver;
 	private String user;
 	private String pass;
@@ -34,14 +36,14 @@ public class PizzaDaoJdbc implements IPizzaDao {
 		this.pass = bundle.getString("jdbc.pass");
 		Class.forName(driver);
 	}
-	public PizzaDaoJdbc(String driver, String url, String user, String pass) throws DaoException {
+	public PizzaDaoJdbc(@Value("${jdbc.driver}") String driver, @Value("${jdbc.url}") String url, @Value("${jdbc.user}") String user,@Value("jdbc.pass") String pass)  {
 		try {
 			Class.forName(driver);
 			this.url = url;
 			this.user = user;
 			this.pass = pass;
 		} catch (ClassNotFoundException e) {
-			throw new DaoException(e);
+			e.printStackTrace();
 		}
 	}
 

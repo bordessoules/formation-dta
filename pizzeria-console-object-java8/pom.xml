@@ -42,8 +42,8 @@
 				<dao.impl>2</dao.impl>
 				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
 				<jdbc.url>jdbc:mysql://localhost:3306/pizzeria-java</jdbc.url>
-				<jdbc.user>root</jdbc.user>
-				<jdbc.pass></jdbc.pass>
+				<jdbc.user>pizzeriadb</jdbc.user>
+				<jdbc.pass>pizzeriadb</jdbc.pass>
 			</properties>
 
 		</profile>
@@ -58,11 +58,10 @@
 		<profile>
 			<id>default</id>
 			<properties>
-				<dao.impl>4</dao.impl>
 				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
 				<jdbc.url>jdbc:mysql://localhost:3306/pizzeria-java</jdbc.url>
-				<jdbc.user>root</jdbc.user>
-				<jdbc.pass></jdbc.pass>
+				<jdbc.user>pizzeriadb</jdbc.user>
+				<jdbc.pass>pizzeriadb</jdbc.pass>
 
 			</properties>
 			<activation>

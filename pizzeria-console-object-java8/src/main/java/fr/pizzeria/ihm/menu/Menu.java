@@ -5,15 +5,20 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import fr.pizzeria.dao.pizza.IPizzaDao;
 import fr.pizzeria.ihm.menu.option.OptionMenu;
 
+@Component
 public class Menu {
 	private String title;
 	Map<Integer, OptionMenu> actions = new TreeMap<>();
 	private Scanner scan;
 	private IPizzaDao dao;
 
+	@Autowired
 	public Menu(Scanner scan, IPizzaDao dao) {
 		super();
 		this.title = "pizzeria administration";
