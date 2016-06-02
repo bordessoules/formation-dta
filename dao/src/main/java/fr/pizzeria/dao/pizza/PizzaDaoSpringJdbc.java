@@ -2,25 +2,29 @@ package fr.pizzeria.dao.pizza;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 @Repository
+@Lazy
 public class PizzaDaoSpringJdbc implements IPizzaDao {
 	private class PizzaMapper implements RowMapper<Pizza> {
 		@Override
@@ -31,19 +35,27 @@ public class PizzaDaoSpringJdbc implements IPizzaDao {
 			p.setNom(rs.getString("nom"));
 			p.setPrix(rs.getDouble("prix"));
 			p.setUrlImage(rs.getString("urlImage"));
-
+			p.setCategorie( CategoriePizza.valueOf(rs.getString("categorie")) );
 			return p;
 		}
 
 	}
 
 	private JdbcTemplate jdbcTemplate;
+	private TransactionTemplate txTemplate;
 
-	@Autowired
+	//@Autowired
 	public PizzaDaoSpringJdbc(DataSource datasource) {
 
 		this.jdbcTemplate = new JdbcTemplate(datasource);
 
+	}
+	
+	@Autowired
+	public PizzaDaoSpringJdbc(DataSource dataSource, PlatformTransactionManager txManager) {
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		this.txTemplate = new TransactionTemplate(txManager);
+		//LOG.log(Level.INFO, "Création du bean PizzaDaoJdbcTemplate");
 	}
 
 	@Override
@@ -54,7 +66,7 @@ public class PizzaDaoSpringJdbc implements IPizzaDao {
 	}
 
 	@Override
-	public void saveNewPizza(Pizza pizza) throws SavePizzaException, DaoException {
+	public void saveNewPizza(Pizza pizza) {
 		String sql = "INSERT INTO PIZZA (code,nom,prix,categorie) VALUES(?,?,?,?)";
 
 		this.jdbcTemplate.update(sql, pizza.getCode(), pizza.getNom(), pizza.getPrix(),
@@ -64,7 +76,7 @@ public class PizzaDaoSpringJdbc implements IPizzaDao {
 
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza) {
-		String sql = "UPDATE PIZZA SET  (code=? ,nom=? ,prix=? ,categorie=? ) WHERE code = ? ";
+		String sql = "UPDATE PIZZA SET  code=? ,nom=? ,prix=? ,categorie=?  WHERE code = ? ";
 
 		this.jdbcTemplate.update(sql, codePizza, pizza.getNom(), pizza.getPrix(), pizza.getCategorie().toString(),
 				codePizza);
@@ -80,13 +92,25 @@ public class PizzaDaoSpringJdbc implements IPizzaDao {
 
 	@Override
 	@Transactional
-	public void saveAllPizza(List<Pizza> pizzas, int nb) throws DaoException {
-		List<List<Pizza>> listpart = ListUtils.partition(pizzas, nb);
-		listpart.forEach(lp ->savePizzaTransaction(lp));
+	public void saveAllPizzas(List<Pizza> pizzas, int nb) throws DaoException {
+
+		ListUtils.partition(pizzas, nb).forEach(list -> {	
+
+			this.txTemplate.execute(status -> {
+				list.forEach(p -> {
+					this.saveNewPizza(p);
+				});
+				return null;
+			});
+
+		});
 	}
 
+	
+	
+	
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public void savePizzaTransaction(List<Pizza> pizzas) {
+	public void savePizzaTransaction(List<Pizza> pizzas) {/*
 
 		pizzas.forEach(pizza -> {
 			try {
@@ -98,6 +122,6 @@ public class PizzaDaoSpringJdbc implements IPizzaDao {
 			}
 		});
 
-	}
+	*/}
 
 }

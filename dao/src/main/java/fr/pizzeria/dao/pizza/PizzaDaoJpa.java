@@ -93,7 +93,7 @@ public class PizzaDaoJpa implements IPizzaDao {
 		}
 	}
 	@Override
-	public void saveAllPizza(List<Pizza> pizzas, int nb )throws DaoException{
+	public void saveAllPizzas(List<Pizza> pizzas, int nb )throws DaoException{
 		EntityManager em = emf.createEntityManager();
 		pizzas.sort(Comparator.comparing(Pizza::getCode));
 		ListUtils.partition(pizzas,nb).forEach(list -> {

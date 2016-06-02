@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 
 import fr.pizzeria.exception.DaoException;
@@ -75,7 +74,7 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 	}
 
 	@Override
-	public void saveAllPizza(List<Pizza> pizzas, int nb) throws DaoException {
+	public void saveAllPizzas(List<Pizza> pizzas, int nb) throws DaoException {
 		throw new DaoException("méthode non implémentée");		
 	}
 

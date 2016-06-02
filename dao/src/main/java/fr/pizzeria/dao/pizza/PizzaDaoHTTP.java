@@ -58,7 +58,7 @@ public class PizzaDaoHTTP implements IPizzaDao {
 	}
 
 	@Override
-	public void saveAllPizza(List<Pizza> pizzas, int nb) throws DaoException {
+	public void saveAllPizzas(List<Pizza> pizzas, int nb) throws DaoException {
 		// TODO Auto-generated method stub
 
 	}
