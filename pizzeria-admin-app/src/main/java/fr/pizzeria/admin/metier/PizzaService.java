@@ -38,6 +38,6 @@ public class PizzaService {
 	}
 
 	public void saveAllPizza(List<Pizza> pizzas, int nb) throws DaoException {
-		dao.saveAllPizza(pizzas, nb);
+		dao.saveAllPizzas(pizzas, nb);
 	}
 }

@@ -13,8 +13,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import fr.pizzeria.exception.DaoException;
@@ -35,27 +38,27 @@ public class PizzaDaoSpringJdbc implements IPizzaDao {
 			p.setNom(rs.getString("nom"));
 			p.setPrix(rs.getDouble("prix"));
 			p.setUrlImage(rs.getString("urlImage"));
-			p.setCategorie( CategoriePizza.valueOf(rs.getString("categorie")) );
+			p.setCategorie(CategoriePizza.valueOf(rs.getString("categorie")));
 			return p;
 		}
 
 	}
 
 	private JdbcTemplate jdbcTemplate;
-	private TransactionTemplate txTemplate;
+	private TransactionTemplate tx;
 
-	//@Autowired
+	// @Autowired
 	public PizzaDaoSpringJdbc(DataSource datasource) {
 
 		this.jdbcTemplate = new JdbcTemplate(datasource);
 
 	}
-	
+
 	@Autowired
 	public PizzaDaoSpringJdbc(DataSource dataSource, PlatformTransactionManager txManager) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
-		this.txTemplate = new TransactionTemplate(txManager);
-		//LOG.log(Level.INFO, "Création du bean PizzaDaoJdbcTemplate");
+		this.tx = new TransactionTemplate(txManager);
+		// LOG.log(Level.INFO, "Création du bean PizzaDaoJdbcTemplate");
 	}
 
 	@Override
@@ -90,38 +93,36 @@ public class PizzaDaoSpringJdbc implements IPizzaDao {
 		this.jdbcTemplate.update(sql, codePizza);
 	}
 
-	@Override
-	@Transactional
+	@Override	
 	public void saveAllPizzas(List<Pizza> pizzas, int nb) throws DaoException {
 
-		ListUtils.partition(pizzas, nb).forEach(list -> {	
+		ListUtils.partition(pizzas, nb).forEach(listp -> {	
 
-			this.txTemplate.execute(status -> {
-				list.forEach(p -> {
-					this.saveNewPizza(p);
-				});
-				return null;
+			this.tx.execute(new TransactionCallbackWithoutResult() {
+				
+				@Override
+				protected void doInTransactionWithoutResult(TransactionStatus ts) {
+					try {
+						listp.forEach(p -> {	
+							//System.out.println(p);
+							saveNewPizza(p);
+					
+						});
+				}catch (Exception e) {
+					ts.setRollbackOnly();
+					throw new RuntimeException();
+				}}
 			});
-
 		});
+			
+			
 	}
 
-	
-	
-	
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public void savePizzaTransaction(List<Pizza> pizzas) {/*
-
-		pizzas.forEach(pizza -> {
-			try {
-				saveNewPizza(pizza);
-			} catch (SavePizzaException e) {
-				e.printStackTrace();
-			} catch (DaoException e) {
-				e.printStackTrace();
-			}
-		});
-
-	*/}
-
+	/*
+	 * @Transactional(propagation = Propagation.REQUIRES_NEW) public void
+	 * savePizzaTransaction(List<Pizza> pizzas) { this.tx pizzas.forEach(pizza
+	 * -> { saveNewPizza(pizza); });
+	 * 
+	 * }
+	 */
 }

@@ -36,7 +36,7 @@ public class ImporterBddOptionMenu extends OptionMenu {
 		listePizzasInitiales.add(new Pizza("PEP", "Pépéroni", 12.50,CategoriePizza.VIANDE));
 
 		try {
-			pizzaDao.saveAllPizza(listePizzasInitiales, 3);
+			pizzaDao.saveAllPizzas(listePizzasInitiales, 3);
 		} catch (DataAccessException | DaoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
