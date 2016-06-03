@@ -1,4 +1,4 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.dao.configuration;
 
 import javax.sql.DataSource;
 
@@ -14,11 +14,7 @@ import fr.pizzeria.dao.pizza.IPizzaDao;
 @Configuration
 @EnableTransactionManagement
 public class SpringJdbcConfig {
-	@Bean
-	public DataSource dataSource() {
-		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).addScript("db-schema.sql")
-				.addScript("db-data.sql").build();
-	}
+	
 
 	
 	@Bean

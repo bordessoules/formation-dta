@@ -6,12 +6,12 @@
 		<class>fr.pizzeria.model.Client</class>
 		<class>fr.pizzeria.model.Livreur</class>
 		<class>fr.pizzeria.model.Commande</class>
+		<class>fr.pizzeria.model.Performance</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value= "${jdbc.url}"/> <!--"jdbc:mysql://localhost:3306/pizzeria-java"/>-->
 			<property name="javax.persistence.jdbc.user" value="${jdbc.user}"/> <!--"root"-->
 			<property name="javax.persistence.jdbc.password" value="${jdbc.pass}"/><!-- -->
-			<property name="javax.persistence.jdbc.driver" value="${jdbc.driver}"/>
-			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/><!--"com.mysql.jdbc.Driver"-->
+			<property name="javax.persistence.jdbc.driver" value="${jdbc.driver}"/><!--"com.mysql.jdbc.Driver"-->
 		</properties>
 	</persistence-unit>
 </persistence>

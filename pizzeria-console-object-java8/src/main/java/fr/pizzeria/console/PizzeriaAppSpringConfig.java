@@ -10,6 +10,7 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -23,8 +24,9 @@ import fr.pizzeria.dao.pizza.PizzaDaoJpa;
 import fr.pizzeria.dao.pizza.PizzaDaoSpringJdbc;
 
 @Configuration
-@ComponentScan("fr.pizzeria.ihm")
+@ComponentScan("fr.pizzeria.ihm,fr.pizzeria.aspect")//faire les import
 @EnableTransactionManagement
+@Import(value = fr.pizzeria.dao.configuration.SpringJpaDataConfig.class)
 public class PizzeriaAppSpringConfig {
 
 	
@@ -34,11 +36,13 @@ public class PizzeriaAppSpringConfig {
 			@Value("${jdbc.user}") String user, @Value("${jdbc.pass}") String pass) {
 		return new DriverManagerDataSource(url, user, pass);
 	}
+	/*
 	@Bean
 	public PlatformTransactionManager txManager(DataSource dataSource ) {
 		return new DataSourceTransactionManager(dataSource);
 
 	}
+	*/
 	@Bean
 	public PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
 		PropertyPlaceholderConfigurer prop = new PropertyPlaceholderConfigurer();
@@ -50,16 +54,16 @@ public class PizzeriaAppSpringConfig {
 	public Scanner scanner() {
 		return new Scanner(System.in);
 	}
-
+/*
 	@Bean
 	public IPizzaDao dao(@Value("${jdbc.driver}") String driver, @Value("${jdbc.url}") String url,
 			@Value("${jdbc.user}") String user, @Value("${jdbc.pass}") String pass) {
-		/*
-		 * IPizzaDao d=null; try { d= new PizzaDaoJdbc(); } catch
-		 * (ClassNotFoundException e) { e.printStackTrace(); }
-		 * 
-		 * return d;
-		 */
+		
+		 IPizzaDao d=null; try { d= new PizzaDaoJdbc(); } catch
+		 (ClassNotFoundException e) { e.printStackTrace(); }
+		 
+		 return d;
+		
 		
 		// return new PizzaDaoImpl();
 
@@ -67,5 +71,5 @@ public class PizzeriaAppSpringConfig {
 		
 		return new PizzaDaoSpringJdbc(dataSource(driver, url, user, pass));
 	}
-
+*/
 }

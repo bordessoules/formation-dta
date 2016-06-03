@@ -1,11 +1,10 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.dao.configuration;
 
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -15,22 +14,18 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import fr.pizzeria.dao.pizza.BatchPizza;
 import fr.pizzeria.dao.pizza.IPizzaDao;
-import fr.pizzeria.dao.pizza.PizzaDaoJpaDataSpring;
+import fr.pizzeria.dao.pizza.PizzaDaoSpringJpa;
+
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories("fr.pizzeria.repos")
-public class SpringJpaDataConfig {
-	@Bean
-	public DataSource dataSource() {
-		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).addScript("db-schema.sql")
-				.addScript("db-data.sql").build();
-	}
+public class SpringJpaConfig {
+	
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-		factory.setPersistenceUnitName("pizzeria-console-object-java8");
-		return factory;
+	public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean() {
+		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
+		emf.setPersistenceUnitName("pizzeria-console-object-java8");
+		return emf;
 	}
 
 	@Bean	
@@ -43,8 +38,8 @@ public class SpringJpaDataConfig {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
 	@Bean
-	public IPizzaDao pizzaDaoJpaDataSpring(){
-		  return new PizzaDaoJpaDataSpring();
+	public IPizzaDao pizzaDaoSpringJpa(){
+		return new PizzaDaoSpringJpa();
 	}
 	@Bean
 	public BatchPizza batchPizza(){
@@ -52,4 +47,3 @@ public class SpringJpaDataConfig {
 	}
 	
 }
-

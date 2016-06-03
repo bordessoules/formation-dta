@@ -8,3 +8,10 @@ CREATE TABLE IF NOT EXISTS `pizza` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_m169cbpctqeb9bc04mkr6nw7n` (`code`)
 );
+
+ CREATE TABLE IF NOT EXISTS `performance` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `service` varchar(255) DEFAULT NULL,
+   `date` timestamp,
+    `temps_execution` int(255) DEFAULT NULL,
+  );

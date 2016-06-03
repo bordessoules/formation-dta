@@ -41,7 +41,7 @@ public class PizzaAdminApp {
 				"application-config.xml")) {
 		*/
 			Menu menu = context.getBean("menu", Menu.class);
-			IPizzaDao pizzaDao = (IPizzaDao) context.getBean("dao");// on
+			IPizzaDao pizzaDao = (IPizzaDao) context.getBean("pizzaDaoJpaDataSpring");// on
 																	// pourais
 																	// faire un
 																	// menu.getDao()
